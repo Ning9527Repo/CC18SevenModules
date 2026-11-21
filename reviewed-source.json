@@ -1,7 +1,7 @@
 {
   "version": "1.0",
   "repository": "Ning9527Repo/CC18SevenModules",
-  "based_on_own_commit": "eae6da51b78d4db2c34b2f65ac483684226d9458",
+  "based_on_own_commit": "780a33abd9f324bb23b26603e6b56858b02827e2",
   "original_repository_unchanged_commit": "7f06b36409d4145457947f25f1d4f473a636bb2e",
   "retained_third_party_modules": 8,
   "removed_third_party_modules": 22,
@@ -9,7 +9,7 @@
   "baseline_arm64_sha256": "7968755fa82cc144c15c7b26253a44080439f24c37b9ae2eee1767b0443f6504",
   "baseline_arm64e_sha256": "200611c76e39a25f8a5c925e9f7161f1af02c507411966b1563d8aa4e8861b7f",
   "sha256": {
-    ".github/workflows/build.yml": "a5ede22cc157826fad2ee2e5b98f003e60a9a666feb8a34e56b6ab715f63a723",
+    ".github/workflows/build.yml": "c9652e4212e646d90f5e7c75d60af81af3c40d5558900dff369f477bd0c562a9",
     ".gitignore": "3945b10ab016b1c9c53a18f492b7876cab70eb197360381ba3043068fa86c614",
     "C18CarrierNames.m": "867fe5a86677090ec6819628e64cf3edfa44a8884a11e3b8e1bb5be7087945f3",
     "C18CellularRate.m": "6fd570469a3d97c0d007281f674d167b09abf645cfc17c858ad4aeb02c1d4f20",
@@ -45,7 +45,7 @@
     "C18UptimeFix.m": "149e007139f892385250f6b5ddd6cc4617a746b89782086c9e1184b7c25f5bf3",
     "CCSIMModule.m": "0e35f44c74bce9b1802105c2ea0f593fb303b14571e5884b3eb43803a5d6604d",
     "POWER-FIX.md": "c9b2f82af2a9b09c71916bf31ea4c1394b60b2aad18562ae819ea15cb0d4f514",
-    "README.md": "67f73805c0a158326f7df75dfacf3408543707c499f892e738b3fa3ce48ef79f",
+    "README.md": "3606bc36ffda2bf74d8fb45b1197638785c68a73906af422f1114c17c9a71b45",
     "Resources/C18DataSwitchGlyph.b64": "c112c7fe9306f3dac626ba22663ec6530ffbd958bbf90de4c7602ce38271c078",
     "Resources/C18DataSwitchGlyph.png": "34c2b0e4a79fa6a1b1b53f0c7e534519c4ad80bbd4c689ac58e88423fbaa6440",
     "Resources/C18PowerHelper.entitlements": "7b2cac0d475041f61be9859c8fbbf7163f5365d92df3f6f7ddba557ed41e266e",
@@ -59,6 +59,10 @@
     "Resources/Recording/manifest.json": "69ddb790288f9df783e566364b071770d91ae97978c733122f508093440d4e26",
     "Resources/Recording/replaykit-v2.ca/main.caml": "5d0e0107e19d97412bd3e5235d70875bad8c6eb2d3378805999aca81bb92d0e2",
     "Resources/Recording/replaykit-v2_IC.ca/main.caml": "5d0e0107e19d97412bd3e5235d70875bad8c6eb2d3378805999aca81bb92d0e2",
+    "Resources/SileoIcon/PackageIcon-128.png": "9a8eb459528953db7db9ad9da8eab00a9c616ff7b2e1bc53eddd347de2a54416",
+    "Resources/SileoIcon/PackageIcon-256.png": "16d93d18920f7b7b47fa9c1cb2971d077c2f7fe4a3b9166ebfac8ead1ad82ea1",
+    "Resources/SileoIcon/PackageIcon-512.png": "3239e6a61cede3b52fde41eb9a8140df1013617a2623e2456f852294beecb533",
+    "Resources/SileoIcon/manifest.json": "f8abc4439045897df7480a1a33d08e0eb593d71fbdb0e19e9da4a9ac0b67b549",
     "Settings/C18EnableControl.h": "270c49c50b41f8a7ca7023d1a5db610e85b590058efeb5b1c3dfc64a5e0903ce",
     "Settings/C18EnableControl.m": "a3e4217a093878690160619d48f4ecee85f53a6a5ca68fe322762b049c43e27e",
     "Settings/C18FourSettings.plist": "d2cdbe5bb992358f38ee58a518e855c8a8fc29efe71ea94ada7d8fe042023dfc",
@@ -70,9 +74,10 @@
     "tools/check_source.py": "bd439ee302214d0c46da93ae0acc774f76a509d8ab1bc2b553cc41deed0dfd0d",
     "tools/fixtures/controlcenter-settings-17.2.1-abi.json": "0c8e8e1e839f52a103eacc3c0fe0b4bb2c1fc7df70dc0a615832399c89b50b0e",
     "tools/macho_layout.py": "a0cb96f31b5b4d191b1854183bb96d05f438e206105cd4efe47131b2fe75b0e4",
-    "tools/package.py": "a3bd708b81751ce579ce4a22ddf1e54829fcf25757d7568693dc522be1403641",
+    "tools/package.py": "b50fbddbd2622230124548345caeaa9f8d11a511ac30edd62877430f1b770e18",
     "tools/prepare_core.py": "b872886aabc5566cc335fc8a206e7d36c45451c72bb9e46c51f0185475dd9bbe",
     "tools/retained_modules.py": "c9eec1acf1fc90e8af23f23ffd7178180f2b9d49d81861920b6b10bdc4ef95b5",
+    "tools/sileo_icon.py": "3cb1e221c33c565c588e9afb85c476614a03bfac4b6c6b1864f4b6e2feae5bfa",
     "tools/test_enable_lifecycle.py": "37a317e69f6e3fc7a84fc5a52cbe42580623f10f68194a0cb6cea8697e4edccb",
     "tools/test_module_migration.py": "cd1d4266180638a1d0164c2d1155f1a15fe8829728fc539285de81eeef478d21",
     "tools/test_native_access.py": "4e1736f74d120bf37364bf646e44a60c56c67482e65b39dfca48e652b7eec17c",
@@ -80,7 +85,8 @@
     "tools/test_power_paths.py": "65c10ff7ae5ef6fb4214ae8bfc93a004443d6ccd96ea8ffcc35548d05f0cb67d",
     "tools/test_power_root.py": "c5c25c609ac81503066138237ca5f1b4c3d51dd5f565f7da6ac484be8fab2233",
     "tools/test_settings.py": "761ac3fb69fb556b25be5dd54281af76efe6f6dd38e6141186480bc5d9af9aed",
-    "tools/verify_delivery.py": "1425d987c95a79e70c593e0cc79fc507f20fa57da9357a43bd8f51cc694ba77c"
+    "tools/test_sileo_icon.py": "afa55d33c409d00ef5d163dfe3b5d16c7a3263fd0f609e44b38ad1d6e63e2f65",
+    "tools/verify_delivery.py": "72b66f80a01c330c1a908cee03f4a531ae385feb3116083af082b1ce9ab970cb"
   },
-  "source_change": "Restore native controller resource class identity and missing system access switch with original callbacks; requested author/package ID only; UIKit runtime pending"
+  "source_change": "Selected original D Sileo package icon only; remove legacy package icon URL from output; no UI or functional source changes; no new build authorized"
 }

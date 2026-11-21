@@ -46,7 +46,7 @@ python3 tools/test_power_root.py
 
 打包使用原来的Python ar/USTAR/XZ流程，不调用macOS ar。不会自动安装、注入、注销、上软件源或执行电源操作。构建／静态验收通过不代表iOS真机功能已验证。
 
-署名沿用 Ning&evgeniy558；保留模块的原作者元数据不被改写。
+主包署名为 Ning；保留模块的原作者元数据不被改写。
 
 ## 仅保留一个启用开关（最新要求）
 
@@ -65,3 +65,7 @@ python3 tools/test_power_root.py
 用户随后真机确认新增启用开关显示且有效，但原“App内访问”行消失、其说明仍在。本轮保留动态子类的原系统`class`资源身份；原访问行存在时保持同一对象，缺失时仅在原访问分组后补一个标准PSSwitchCell，仍调用系统`allowedWithinApps:`／`setAllowedWithinApps:specifier:`，不写插件偏好、不重建整页。新增开关、还原、8模块及旧越界保护不变。包显示名仍为ControlCenter18；按本轮要求Author/Maintainer为Ning，Package改为com.ning.controlcenter18，通过Conflicts/Replaces/Provides替换旧ID，运行时旧偏好域保持兼容。未上源。
 
 这是针对已确认启动阻断与越界路径及原生访问行回归的修正，不等同于已完成真机验证。双架构语法、Objective-C路由模型、物理删除与终包签名校验不能替代安装后的开关显示／运行态验证。构建时原库文件名`C18FourSettings`仅为同包替换兼容保留，内容只含一个原列表开关，旧四项类和行为不会打包。
+
+## Sileo 包图标（原版 D）
+
+选用原版 D「霓彩 18」，不采用 B 的背景色。仅在包内安装 `usr/share/icons/com.ning.controlcenter18*.png` 三档资源（512/256/128）；普通无根版带 `var/jb/` 前缀。打包时直接删除旧的大小写 `Icon/icon` 字段及其引用，只写一个指向新 D 图标的 `Icon:`，不保留旧图标回退。旧图标原为外部 URL，基线未携带单独的包图标图片文件。旧独立设置页、入口和专属图片已删除；本次不新增设置页、不更换控制中心模块图标、不改功能代码。源码同步不代表已构建、安装或上源。

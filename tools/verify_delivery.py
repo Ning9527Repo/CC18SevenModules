@@ -5,6 +5,7 @@ from pathlib import Path
 from package import ROOT,VERSION,PACKAGE_ID,LEGACY_PACKAGE_ID,BASELINES,deb_members,archive
 from retained_modules import verify_retained_entries
 from test_settings import verify_settings_entries
+from sileo_icon import verify as verify_sileo_icon
 
 
 def verify():
@@ -19,6 +20,7 @@ def verify():
             retained=verify_retained_entries(data,prefix)
             settings=verify_settings_entries(data,prefix,require_adapter=True)
             metadata=control['control'][1]
+            icon_report=verify_sileo_icon(data,prefix,metadata)
             assert f'Architecture: iphoneos-{arch}'.encode() in metadata
             assert f'Version: {VERSION}'.encode() in metadata
             fields=dict(line.split(b':',1) for line in metadata.splitlines() if b':' in line)
@@ -62,7 +64,7 @@ def verify():
                     expected=plistlib.loads((ROOT/'Resources/C18PowerHelper.entitlements').read_bytes())
                     assert all(actual.get(k)==v for k,v in expected.items()), 'Missing power helper entitlement'
                 programs.append({'name':name,'sha256':hashlib.sha256(content).hexdigest(),'subtypes':[hex(n) for n in subtypes],'codesign_strict_all_architectures':True})
-            report={'file':path.name,'bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest(),'arch':arch,'programs':programs,'retained_modules':retained,'enable_only_settings':settings,'device_tested':False}
+            report={'file':path.name,'bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest(),'arch':arch,'programs':programs,'retained_modules':retained,'enable_only_settings':settings,'sileo_icon':icon_report,'device_tested':False}
             reports.append(report)
             print('FINAL_PACKAGE_VERIFIED',json.dumps(report),flush=True)
     (ROOT/'build/package-validation.json').write_text(json.dumps(reports,indent=2)+'\n')

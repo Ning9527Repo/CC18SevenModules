@@ -188,10 +188,12 @@ def main():
             info.mode, info.size = mode, len(content)
             data[name] = (info, content)
             settings_added.add(name)
-        assert data.keys() == (original.keys() - slim_removed) | helper_added | {target} | settings_added
+        from sileo_icon import install as install_sileo_icon
+        sileo_added=install_sileo_icon(data,prefix)
+        assert data.keys() == (original.keys() - slim_removed) | helper_added | {target} | settings_added | sileo_added
         from retained_modules import verify_retained_entries
         verify_retained_entries(data, prefix)
-        assert all(data[name] == original[name] for name in data if name not in ({target} | cores | settings_added | helper_added)), "Overlay escaped reviewed scope"
+        assert all(data[name] == original[name] for name in data if name not in ({target} | cores | settings_added | helper_added | sileo_added)), "Overlay escaped reviewed scope"
         from test_settings import verify_settings_entries
         verify_settings_entries(data, prefix, require_adapter=True)
         helper_info, helper_bytes = data[helper]
@@ -221,6 +223,9 @@ def main():
             line=(key+": "+', '.join(values)).encode()
             if key.encode() in fields:new_control,n=re.subn(rb"(?m)^"+key.encode()+rb":[^\r\n]*",line,new_control);assert n==1
             else:new_control=new_control.rstrip(b'\n')+b'\n'+line+b'\n'
+        from sileo_icon import replace_icon_field, verify as verify_sileo_icon
+        new_control=replace_icon_field(new_control,prefix)
+        verify_sileo_icon(data,prefix,new_control)
         replace_content(control, "control", new_control)
         out = dist / f"{PACKAGE_ID}_{VERSION}_iphoneos-{arch}.deb"
         write_deb(out, serialize(control, compressed=True), compress_data(serialize(data)))

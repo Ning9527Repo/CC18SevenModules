@@ -1,0 +1,22 @@
+{
+  "selection": "D-vivid-18-original",
+  "scope": "Sileo package icon only; not Preferences or Control Center",
+  "master_sha256": "3239e6a61cede3b52fde41eb9a8140df1013617a2623e2456f852294beecb533",
+  "assets": [
+    {
+      "file": "PackageIcon-512.png",
+      "size": 512,
+      "sha256": "3239e6a61cede3b52fde41eb9a8140df1013617a2623e2456f852294beecb533"
+    },
+    {
+      "file": "PackageIcon-256.png",
+      "size": 256,
+      "sha256": "16d93d18920f7b7b47fa9c1cb2971d077c2f7fe4a3b9166ebfac8ead1ad82ea1"
+    },
+    {
+      "file": "PackageIcon-128.png",
+      "size": 128,
+      "sha256": "9a8eb459528953db7db9ad9da8eab00a9c616ff7b2e1bc53eddd347de2a54416"
+    }
+  ]
+}
