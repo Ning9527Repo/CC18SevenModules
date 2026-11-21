@@ -48,20 +48,16 @@ python3 tools/test_power_root.py
 
 署名沿用 Ning&evgeniy558；保留模块的原作者元数据不被改写。
 
-## 仅保留四项设置，直接进入系统控制中心页面
+## 仅保留一个启用开关（最新要求）
 
-`Settings/C18SettingsBridge.m` 与 `C18SettingsActions.m` 为新源码实现，仅向 `CCUISettingsListController` 追加「启用插件、保存预设、导入预设、崩溃日志」及必要分组说明，不创建中间跳转页。
+系统「设置 → 控制中心」内仅追加「启用插件」开关及必要说明，直接读写原域`com.evgeniy558.controlcenter18`的`Enabled`并发布原prefs通知；默认关闭。不自动注销，不承诺无需手动注销即可完整热切换引擎。
 
-旧 `ControlCenter18Prefs.bundle` 全部程序、独立 PreferenceLoader 入口、介绍大图、警告卡片及旧本地化已从两版 Vendor 输入中物理删除；旧 prefs_cleanup/prepare_prefs/test_prefs 补丁源码删除。不会载入旧根页后仅隐藏行。构建时新编译 `C18FourSettings.dylib`，过滤器只注入系统设置进程。
+独立插件设置页和PreferenceLoader入口已从两个Vendor中物理删除。本次继续实际删除保存预设、导入预设、日志浏览与分享、文档选择器及其处理源码，原`C18SettingsActions.h/.m`不再存在。改为只含两个偏好读写方法的`C18EnableControl.h/.m`。不保留隐藏页、跳转入口或仅禁用的动作代码。
 
-保留原有系统控制中心页面桥 `ControlCenter18Settings.dylib`，它提供第一张截图已有的系统页面布局（App内访问、还原等）；不是旧插件根设置页。新库通过合并 specifiers 保留系统原行。原控制中心核心、布局和非设置功能不重写。
+原生App内访问、还原控制中心、控制中心引擎、四五键和八个保留模块不在删除范围。版本保持1.0，旧仓库不动。
 
-启用键仍是原CFPreferences域 `com.evgeniy558.controlcenter18` 的 `Enabled`，发布原通知，不自动注销；开关说明明确需要用户手动注销以完整生效。保存／导入兼容原 XML/binary plist 包装及裸布局、原文件路径与reloadLayout通知；没有有效控制配置时不会清空旧配置。布局与控制配置分别原子写入，不是跨文件事务，部分失败会明确提示。
+上一版用户反馈四项未显示并且设置App闪退。2026-11-21 20:50:52 的真实报告为NSRangeException：`-[__NSArrayM objectAtIndex:]: index 0 beyond bounds for empty array`，异常链包含系统`ControlCenterSettings`的`_identifierAtIndexPath:`（静态+0x36b0，调用objectAtIndex）及CCSupport的cell呈现。新增分组进入系统按模块行索引的路径，是需要移除的风险点。
 
-日志仅读取原ControlCenter18日志目录中的`.log`，不扫描系统其他崩溃目录，不删除日志。日志页面和分享属于保留的「崩溃日志」功能。
+本版完全删除PSSpecifier构造、specifiers hook、_specifiers替换及所有新增表格行／分组，改为仅在目标系统控制中心设置控制器的`viewDidLayoutSubviews`原实现之后附加一个普通UIKit footer，内含标签和UISwitch。已有footer原样保留在组合footer上方；不改dataSource、delegate、enabled/disabled数组或行索引，也不使用私有PSSpecifier工厂，避免再次走该新增设置行的越界路径。附加操作有重入保护、单次hook和镜像迟加载支持。
 
-本次源码包括恢复的「注销」模块：迁移身份不再将该ID及`#2`实例判为已删；原完整目录与中文选项恢复。其他22项仍被物理删除。仓库名保留为`CC18SevenModules`以沿用已经创建的独立仓库，但当前功能实际是八项；不自动重命名或新建第三个仓库。
-
-### 验证边界
-
-新设置源码双架构严格语法、导入格式模型和终包文件检查可在CI验证；目标系统私有PSSpecifier签名、真实页面挂载、iCloud提供器导入导出、启用后的运行态效果仍需真机确认。不会把构建通过说成真机全部可用。
+这是针对已确认越界路径的结构修正，不等同于已完成真机验证。双架构语法、物理删除与终包签名校验不能替代安装后的开关显示／运行态验证。构建时原库文件名`C18FourSettings`仅为同包替换兼容保留，内容只含一个开关，旧四项类和行为不会打包。

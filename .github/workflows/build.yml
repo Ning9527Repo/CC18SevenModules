@@ -1,4 +1,4 @@
-name: Build CC18 1.0 eight modules and four native settings
+name: Build CC18 1.0 eight modules and one native enable switch
 on:
   workflow_dispatch:
 permissions:
@@ -14,7 +14,7 @@ jobs:
         run: |
           python3 tools/retained_modules.py
           python3 tools/test_module_migration.py
-      - name: Verify four native settings and old preference-page removal
+      - name: Verify one native enable switch and old preference-page removal
         run: python3 tools/test_settings.py
       - name: Check four-action backend and obsolete UI deletion
         run: python3 tools/test_power_root.py
@@ -50,7 +50,7 @@ jobs:
           xcrun lipo -create -output build/C18PowerHelper build/C18PowerHelper-arm64 build/C18PowerHelper-arm64e
           codesign --force --sign - --timestamp=none --entitlements Resources/C18PowerHelper.entitlements build/C18PowerHelper
           codesign --verify --strict --all-architectures build/C18PowerHelper
-      - name: Compile and sign four-function native Settings adapter
+      - name: Compile and sign enable-only native Settings adapter
         shell: bash
         run: |
           set -euo pipefail
@@ -58,9 +58,9 @@ jobs:
           for ARCH in arm64 arm64e; do
             xcrun --sdk iphoneos clang -fobjc-arc -fblocks -O2 -Wall -Wextra -Werror \
               -isysroot "$SDK" -target "${ARCH}-apple-ios15.0" -dynamiclib -I. \
-              -framework Foundation -framework UIKit -framework UniformTypeIdentifiers -framework CoreFoundation \
+              -framework Foundation -framework UIKit -framework CoreFoundation \
               -Wl,-undefined,dynamic_lookup -Wl,-install_name,@loader_path/C18FourSettings.dylib \
-              Settings/C18SettingsActions.m Settings/C18SettingsBridge.m -o "build/C18FourSettings-${ARCH}.dylib"
+              Settings/C18EnableControl.m Settings/C18SettingsBridge.m -o "build/C18FourSettings-${ARCH}.dylib"
             xcrun strip -x "build/C18FourSettings-${ARCH}.dylib"
           done
           xcrun lipo -create -output build/C18FourSettings.dylib build/C18FourSettings-arm64.dylib build/C18FourSettings-arm64e.dylib
@@ -74,7 +74,7 @@ jobs:
         run: python3 tools/verify_delivery.py
       - uses: actions/upload-artifact@v4
         with:
-          name: CC18-1.0-eight-modules-four-settings
+          name: CC18-1.0-eight-modules-enable-only
           path: |
             dist/com.evgeniy558.controlcenter18_1.0_iphoneos-arm64.deb
             dist/com.evgeniy558.controlcenter18_1.0_iphoneos-arm64e.deb

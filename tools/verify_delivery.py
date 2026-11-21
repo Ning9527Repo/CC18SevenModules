@@ -31,7 +31,7 @@ def verify():
             names=[folder+n for n in ('ControlCenter18.dylib','ControlCenter18Modules.dylib','C18ConnectivityFive.dylib')]
             names.append(folder+'C18FourSettings.dylib')
             adapter=data[folder+'C18FourSettings.dylib'][1]
-            for token in (b'C18PRootListController',b'C18PHeaderView',b'openDeveloper:'):
+            for token in (b'C18PRootListController',b'C18PHeaderView',b'openDeveloper:',b'C18SettingsActions',b'C18LogListController',b'C18LogDetailController',b'savePreset:',b'importPreset:',b'showLogs:',b'UIDocumentPickerViewController',b'preferenceSpecifierNamed:target:set:get:detail:cell:edit:'):
                 assert token not in adapter,'old unwanted preference code included'
             helper=prefix+'usr/libexec/C18PowerHelper'
             helper_info,helper_content=data[helper]
@@ -55,7 +55,7 @@ def verify():
                     expected=plistlib.loads((ROOT/'Resources/C18PowerHelper.entitlements').read_bytes())
                     assert all(actual.get(k)==v for k,v in expected.items()), 'Missing power helper entitlement'
                 programs.append({'name':name,'sha256':hashlib.sha256(content).hexdigest(),'subtypes':[hex(n) for n in subtypes],'codesign_strict_all_architectures':True})
-            report={'file':path.name,'bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest(),'arch':arch,'programs':programs,'retained_modules':retained,'four_settings':settings,'device_tested':False}
+            report={'file':path.name,'bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest(),'arch':arch,'programs':programs,'retained_modules':retained,'enable_only_settings':settings,'device_tested':False}
             reports.append(report)
             print('FINAL_PACKAGE_VERIFIED',json.dumps(report),flush=True)
     (ROOT/'build/package-validation.json').write_text(json.dumps(reports,indent=2)+'\n')

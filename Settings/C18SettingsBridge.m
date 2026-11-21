@@ -1,96 +1,129 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import <objc/runtime.h>
-#import <objc/message.h>
 #import <mach-o/dyld.h>
 #import <dispatch/dispatch.h>
 #import <stdatomic.h>
 #import "../C18HookRuntime.h"
-#import "C18SettingsActions.h"
+#import "C18EnableControl.h"
 
-// Declaration only. Actual implementations are supplied by Preferences.framework.
-@interface C18FourSpecifier : NSObject
-+ (instancetype)preferenceSpecifierNamed:(NSString *)name target:(id)target set:(SEL)set get:(SEL)get detail:(Class)detail cell:(NSInteger)cell edit:(Class)edit;
-+ (instancetype)groupSpecifierWithName:(NSString *)name;
-- (void)setProperty:(id)value forKey:(NSString *)key;
-- (id)propertyForKey:(NSString *)key;
-- (void)setButtonAction:(SEL)action;
-@end
 extern void MSHookMessageEx(Class,SEL,IMP,IMP *);
-static id (*gOriginalSpecifiers)(id,SEL);
+static void (*gOriginalLayout)(id,SEL);
 static BOOL gInstalled;
 static atomic_bool gScheduled;
-static char kSettingsActions;
-static NSString * const kFourMarker=@"NingCC18FourSettings";
-static void C18FourScheduleInstall(void);
+static char kEnableFooter;
+static void C18EnableScheduleInstall(void);
 
-static C18FourSpecifier *C18FourGroup(Class cls,NSString *title,NSString *footer) {
-    C18FourSpecifier *group=[cls groupSpecifierWithName:title];
-    [group setProperty:kFourMarker forKey:@"c18FourOwner"];
-    if(footer.length)[group setProperty:footer forKey:@"footerText"];
-    return group;
+// A normal UIKit footer, not a module row. Do not modify specifiers, section
+// indices, table delegates/data sources or enabled/disabled module arrays.
+@interface C18EnableFooter : UIView
+@property(nonatomic,strong) UIView *previousFooter;
+@property(nonatomic,strong) UIView *row;
+@property(nonatomic,strong) UILabel *label;
+@property(nonatomic,strong) UISwitch *toggle;
+@property(nonatomic,strong) C18EnableControl *control;
+@property(nonatomic) CGFloat previousHeight;
+@property(nonatomic) BOOL updating;
+- (CGFloat)heightForWidth:(CGFloat)width;
+- (void)refresh;
+@end
+@implementation C18EnableFooter
+- (instancetype)initWithFrame:(CGRect)frame {
+    if(!(self=[super initWithFrame:frame]))return nil;
+    self.backgroundColor=UIColor.clearColor;
+    _control=[C18EnableControl new];
+    _row=[UIView new];_row.backgroundColor=UIColor.secondarySystemGroupedBackgroundColor;
+    _row.layer.cornerRadius=12;_row.clipsToBounds=YES;[self addSubview:_row];
+    _label=[UILabel new];_label.text=@"启用插件";_label.textColor=UIColor.labelColor;
+    _label.font=[UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+    _label.adjustsFontForContentSizeCategory=YES;_label.numberOfLines=0;[_row addSubview:_label];
+    _toggle=[UISwitch new];_toggle.accessibilityLabel=@"启用 CC18";
+    [_toggle addTarget:self action:@selector(changed:) forControlEvents:UIControlEventValueChanged];
+    [_row addSubview:_toggle];[self refresh];return self;
 }
-static C18FourSpecifier *C18FourButton(Class cls,C18SettingsActions *actions,NSString *title,SEL selector) {
-    C18FourSpecifier *row=[cls preferenceSpecifierNamed:title target:actions set:NULL get:NULL detail:Nil cell:13 edit:Nil];
-    [row setButtonAction:selector];
-    [row setProperty:kFourMarker forKey:@"c18FourOwner"];
-    return row;
+- (CGFloat)heightForWidth:(CGFloat)width {
+    CGFloat labelWidth=MAX(40,width-32-32-_toggle.intrinsicContentSize.width-12);
+    CGFloat labelHeight=[_label sizeThatFits:CGSizeMake(labelWidth,CGFLOAT_MAX)].height;
+    return _previousHeight+24+MAX(52,labelHeight+24)+16;
 }
-static id C18FourSpecifiers(id host,SEL command) {
-    id original=gOriginalSpecifiers?gOriginalSpecifiers(host,command):nil;
-    if(!NSThread.isMainThread || ![host isKindOfClass:UIViewController.class] || ![original isKindOfClass:NSArray.class])return original;
-    Class cls=objc_getClass("PSSpecifier");
-    if(!cls)return original;
-    C18SettingsActions *actions=objc_getAssociatedObject(host,&kSettingsActions);
-    if(!actions){actions=[C18SettingsActions new];actions.host=host;objc_setAssociatedObject(host,&kSettingsActions,actions,OBJC_ASSOCIATION_RETAIN_NONATOMIC);}
-    NSMutableArray *result=[NSMutableArray array];
-    for(id row in original){
-        if([row respondsToSelector:@selector(propertyForKey:)] && [[row propertyForKey:@"c18FourOwner"] isEqual:kFourMarker])continue;
-        [result addObject:row];
+- (void)layoutSubviews {
+    [super layoutSubviews];CGFloat width=self.bounds.size.width;
+    if(_previousFooter)_previousFooter.frame=CGRectMake(0,0,width,_previousHeight);
+    CGFloat rowHeight=MAX(52,self.bounds.size.height-_previousHeight-40);
+    _row.frame=CGRectMake(16,_previousHeight+24,MAX(0,width-32),rowHeight);
+    CGSize size=_toggle.intrinsicContentSize;
+    BOOL rtl=self.effectiveUserInterfaceLayoutDirection==UIUserInterfaceLayoutDirectionRightToLeft;
+    CGFloat switchX=rtl?16:MAX(16,_row.bounds.size.width-16-size.width);
+    _toggle.frame=CGRectMake(switchX,(rowHeight-size.height)*.5,size.width,size.height);
+    CGFloat labelX=rtl?switchX+size.width+12:16;
+    CGFloat labelWidth=MAX(0,_row.bounds.size.width-size.width-44);
+    _label.frame=CGRectMake(labelX,8,labelWidth,rowHeight-16);
+}
+- (void)refresh {[_toggle setOn:[[_control readEnabled:nil] boolValue] animated:NO];}
+- (void)changed:(UISwitch *)sender {
+    [_control setEnabled:@(sender.on) specifier:nil];
+    // Reflect the persisted value; never claim a failed preference write worked.
+    [self refresh];
+}
+@end
+
+static UITableView *C18EnableFindTable(UIView *root,NSUInteger depth,NSUInteger *remaining) {
+    if(!root || depth>12 || !*remaining)return nil;
+    (*remaining)--;
+    if([root isKindOfClass:UITableView.class])return (UITableView *)root;
+    for(UIView *child in root.subviews){
+        UITableView *table=C18EnableFindTable(child,depth+1,remaining);
+        if(table)return table;
+        if(!*remaining)break;
     }
-    [result addObject:C18FourGroup(cls,nil,@"打开插件后需手动注销，才能完整应用更改。")];
-    C18FourSpecifier *enabled=[cls preferenceSpecifierNamed:@"启用插件" target:actions set:@selector(setEnabled:specifier:) get:@selector(readEnabled:) detail:Nil cell:6 edit:Nil];
-    [enabled setProperty:@"Enabled" forKey:@"key"];
-    [enabled setProperty:@"com.evgeniy558.controlcenter18" forKey:@"defaults"];
-    [enabled setProperty:@NO forKey:@"default"];
-    [enabled setProperty:kFourMarker forKey:@"c18FourOwner"];
-    [result addObject:enabled];
-    [result addObject:C18FourGroup(cls,@"预设",@"预设包含控制中心布局。保存到“文件”后，可以重新导入。")];
-    [result addObject:C18FourButton(cls,actions,@"保存预设",@selector(savePreset:))];
-    [result addObject:C18FourButton(cls,actions,@"导入预设",@selector(importPreset:))];
-    [result addObject:C18FourGroup(cls,@"诊断",@"如果 SpringBoard 崩溃，请将日志发送给开发者。")];
-    [result addObject:C18FourButton(cls,actions,@"崩溃日志",@selector(showLogs:))];
-    // PSListController accesses its own array for row callbacks. Publish the same
-    // array we return; do not create a mismatch between visible rows and indices.
-    Ivar ivar=class_getInstanceVariable(object_getClass(host),"_specifiers");
-    if(!ivar || !C18HookTypeMatches(ivar_getTypeEncoding(ivar),"@"))return original;
-    object_setIvar(host,ivar,result);
-    return result;
+    return nil;
 }
-static void C18FourInstall(void) {
+static void C18EnableLayout(id object,SEL command) {
+    if(gOriginalLayout)gOriginalLayout(object,command);
+    if(!NSThread.isMainThread || ![object isKindOfClass:UIViewController.class])return;
+    UIViewController *host=object;
+    UIView *root=host.viewIfLoaded;if(!root)return;
+    NSUInteger remaining=256;UITableView *table=C18EnableFindTable(root,0,&remaining);
+    if(!table || table.bounds.size.width<=0)return;
+    C18EnableFooter *footer=objc_getAssociatedObject(host,&kEnableFooter);
+    if(footer.updating)return;
+    if(!footer){footer=[[C18EnableFooter alloc] initWithFrame:CGRectZero];objc_setAssociatedObject(host,&kEnableFooter,footer,OBJC_ASSOCIATION_RETAIN_NONATOMIC);}
+    footer.updating=YES;
+    @try {
+        UIView *existing=table.tableFooterView;
+        if(existing!=footer){
+            [footer.previousFooter removeFromSuperview];
+            footer.previousFooter=existing;
+            footer.previousHeight=existing?MAX(0,existing.frame.size.height):0;
+            // Capture the retained system footer before attaching the wrapper.
+            table.tableFooterView=nil;
+            if(existing)[footer addSubview:existing];
+        }
+        CGFloat width=table.bounds.size.width,height=[footer heightForWidth:width];
+        CGRect frame=CGRectMake(0,0,width,height);
+        BOOL changed=table.tableFooterView!=footer || !CGSizeEqualToSize(footer.frame.size,frame.size);
+        footer.frame=frame;[footer refresh];[footer setNeedsLayout];
+        if(changed)table.tableFooterView=footer;
+    } @finally {footer.updating=NO;}
+}
+static void C18EnableInstall(void) {
     if(gInstalled || !NSThread.isMainThread)return;
-    Class target=objc_getClass("CCUISettingsListController"),spec=objc_getClass("PSSpecifier");
-    if(!target || !spec || !C18HookCanInstall(target,sel_registerName("specifiers"),"@",@[]))return;
-    if(!class_getInstanceVariable(target,"_specifiers"))return;
-    if(!C18HookSignatureMatches(class_getClassMethod(spec,@selector(groupSpecifierWithName:)),"@",@[@"@"]))return;
-    if(!C18HookSignatureMatches(class_getClassMethod(spec,@selector(preferenceSpecifierNamed:target:set:get:detail:cell:edit:)),"@",@[@"@",@"@",@":",@":",@"#",@"q",@"#"]))return;
-    if(!C18HookCanInstall(spec,@selector(setProperty:forKey:),"v",@[@"@",@"@"]) || !C18HookCanInstall(spec,@selector(setButtonAction:),"v",@[@":"]))return;
-    gInstalled=YES; // Set before the one and only hook operation; never overwrite orig.
-    MSHookMessageEx(target,sel_registerName("specifiers"),(IMP)C18FourSpecifiers,(IMP *)&gOriginalSpecifiers);
+    Class target=objc_getClass("CCUISettingsListController");
+    SEL selector=@selector(viewDidLayoutSubviews);
+    if(!target || !C18HookCanInstall(target,selector,"v",@[]))return;
+    gInstalled=YES;
+    MSHookMessageEx(target,selector,(IMP)C18EnableLayout,(IMP *)&gOriginalLayout);
 }
-static void C18FourScheduleInstall(void) {
+static void C18EnableScheduleInstall(void) {
     if(atomic_exchange_explicit(&gScheduled,true,memory_order_relaxed))return;
-    dispatch_async(dispatch_get_main_queue(),^{atomic_store_explicit(&gScheduled,false,memory_order_relaxed);C18FourInstall();});
+    dispatch_async(dispatch_get_main_queue(),^{atomic_store_explicit(&gScheduled,false,memory_order_relaxed);C18EnableInstall();});
 }
-static void C18FourImageAdded(const struct mach_header *header,intptr_t slide) {
-    (void)header;(void)slide;C18FourScheduleInstall();
+static void C18EnableImageAdded(const struct mach_header *header,intptr_t slide) {
+    (void)header;(void)slide;C18EnableScheduleInstall();
 }
-__attribute__((constructor)) static void C18FourInitialize(void) {
+__attribute__((constructor)) static void C18EnableInitialize(void) {
     @autoreleasepool {
         if(![NSBundle.mainBundle.bundleIdentifier isEqualToString:@"com.apple.Preferences"])return;
-        // Defer metadata installation until image initializers have completed.
-        // The retained native-system page bridge installs synchronously from its
-        // own image callback, then this adapter wraps the completed specifiers.
-        _dyld_register_func_for_add_image(C18FourImageAdded);
+        _dyld_register_func_for_add_image(C18EnableImageAdded);
     }
 }

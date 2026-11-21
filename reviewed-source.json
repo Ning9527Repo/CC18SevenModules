@@ -1,15 +1,15 @@
 {
   "version": "1.0",
   "repository": "Ning9527Repo/CC18SevenModules",
-  "based_on_own_commit": "a84809179b762c2c1c0a03b8c667c19374fc0fd2",
+  "based_on_own_commit": "56cb3994fa442a74c719b4b4f8540343bf774fab",
   "original_repository_unchanged_commit": "7f06b36409d4145457947f25f1d4f473a636bb2e",
   "retained_third_party_modules": 8,
   "removed_third_party_modules": 22,
-  "settings_functions": 4,
+  "settings_functions": 1,
   "baseline_arm64_sha256": "7968755fa82cc144c15c7b26253a44080439f24c37b9ae2eee1767b0443f6504",
   "baseline_arm64e_sha256": "200611c76e39a25f8a5c925e9f7161f1af02c507411966b1563d8aa4e8861b7f",
   "sha256": {
-    ".github/workflows/build.yml": "52a67bdf626adc083904f032013a62923726bad7a40db6105e8c0146cecc0123",
+    ".github/workflows/build.yml": "d18de170adccd1197502d6bb7411cfcbde52b54b989aa67b9825de9909e04ae5",
     ".gitignore": "3945b10ab016b1c9c53a18f492b7876cab70eb197360381ba3043068fa86c614",
     "C18CarrierNames.m": "867fe5a86677090ec6819628e64cf3edfa44a8884a11e3b8e1bb5be7087945f3",
     "C18CellularRate.m": "6fd570469a3d97c0d007281f674d167b09abf645cfc17c858ad4aeb02c1d4f20",
@@ -45,7 +45,7 @@
     "C18UptimeFix.m": "149e007139f892385250f6b5ddd6cc4617a746b89782086c9e1184b7c25f5bf3",
     "CCSIMModule.m": "0e35f44c74bce9b1802105c2ea0f593fb303b14571e5884b3eb43803a5d6604d",
     "POWER-FIX.md": "c9b2f82af2a9b09c71916bf31ea4c1394b60b2aad18562ae819ea15cb0d4f514",
-    "README.md": "8b1022771fb43fdb61669424a973dfdad89ea17346c24fefa659e74e65293bbe",
+    "README.md": "93041c50eb12d41627e51080f0c6588569db9984f975777a89ea33a4e4d0ac71",
     "Resources/C18DataSwitchGlyph.b64": "c112c7fe9306f3dac626ba22663ec6530ffbd958bbf90de4c7602ce38271c078",
     "Resources/C18DataSwitchGlyph.png": "34c2b0e4a79fa6a1b1b53f0c7e534519c4ad80bbd4c689ac58e88423fbaa6440",
     "Resources/C18PowerHelper.entitlements": "7b2cac0d475041f61be9859c8fbbf7163f5365d92df3f6f7ddba557ed41e266e",
@@ -59,10 +59,10 @@
     "Resources/Recording/manifest.json": "69ddb790288f9df783e566364b071770d91ae97978c733122f508093440d4e26",
     "Resources/Recording/replaykit-v2.ca/main.caml": "5d0e0107e19d97412bd3e5235d70875bad8c6eb2d3378805999aca81bb92d0e2",
     "Resources/Recording/replaykit-v2_IC.ca/main.caml": "5d0e0107e19d97412bd3e5235d70875bad8c6eb2d3378805999aca81bb92d0e2",
+    "Settings/C18EnableControl.h": "270c49c50b41f8a7ca7023d1a5db610e85b590058efeb5b1c3dfc64a5e0903ce",
+    "Settings/C18EnableControl.m": "a3e4217a093878690160619d48f4ecee85f53a6a5ca68fe322762b049c43e27e",
     "Settings/C18FourSettings.plist": "d2cdbe5bb992358f38ee58a518e855c8a8fc29efe71ea94ada7d8fe042023dfc",
-    "Settings/C18SettingsActions.h": "71000df6657ffd1f676fab2b0e68bf3699dcfd0958e90da15bed17b94e0ac6f1",
-    "Settings/C18SettingsActions.m": "1d3515da41a3c0bb09218aa773e8089ecb3f53d3ac48c7a5ac6c7067d79683df",
-    "Settings/C18SettingsBridge.m": "23ce84e07bf0e33bd8181ac84aeb09a118ad2cde26b2dcd883a730e9c4903390",
+    "Settings/C18SettingsBridge.m": "a06975698404068ba81797f0f2c8b398328b9be1c77112cd086595aebd963fce",
     "Tweak.m": "4ce0ab0bf9ecdc86fe31ee0ea31787eb5a8d1f40d2463dad3c598b1946ce02f7",
     "Vendor/baseline-arm64.deb": "7968755fa82cc144c15c7b26253a44080439f24c37b9ae2eee1767b0443f6504",
     "Vendor/baseline-arm64e.deb": "200611c76e39a25f8a5c925e9f7161f1af02c507411966b1563d8aa4e8861b7f",
@@ -75,7 +75,8 @@
     "tools/test_module_migration.py": "cd1d4266180638a1d0164c2d1155f1a15fe8829728fc539285de81eeef478d21",
     "tools/test_power_paths.py": "65c10ff7ae5ef6fb4214ae8bfc93a004443d6ccd96ea8ffcc35548d05f0cb67d",
     "tools/test_power_root.py": "c5c25c609ac81503066138237ca5f1b4c3d51dd5f565f7da6ac484be8fab2233",
-    "tools/test_settings.py": "46a9746187cdd8d8cf64287d990d0676435f9a27d73d443f85143fb97c794d0d",
-    "tools/verify_delivery.py": "aba7162a221f0479d6de02ef2f3644d347e25fb7f20586598f415fe68b2db43f"
-  }
+    "tools/test_settings.py": "b76bcf8038e0162749e5ad47a6f1653cb0f939a268417bbb41feefe9b0a2d9d9",
+    "tools/verify_delivery.py": "8175bf3a2caadf5225c8d9ef89a6900aab03e9e0322fe07fe53ab17cca746fc3"
+  },
+  "source_change": "Delete preset/import/log implementations; use a single native footer switch without altering module rows; on-device validation pending"
 }
