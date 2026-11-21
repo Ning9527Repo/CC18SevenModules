@@ -1,7 +1,7 @@
 {
   "version": "1.0",
   "repository": "Ning9527Repo/CC18SevenModules",
-  "based_on_own_commit": "56cb3994fa442a74c719b4b4f8540343bf774fab",
+  "based_on_own_commit": "e0b8e266351a8c08d3ba76542d6c90542e78b31d",
   "original_repository_unchanged_commit": "7f06b36409d4145457947f25f1d4f473a636bb2e",
   "retained_third_party_modules": 8,
   "removed_third_party_modules": 22,
@@ -9,7 +9,7 @@
   "baseline_arm64_sha256": "7968755fa82cc144c15c7b26253a44080439f24c37b9ae2eee1767b0443f6504",
   "baseline_arm64e_sha256": "200611c76e39a25f8a5c925e9f7161f1af02c507411966b1563d8aa4e8861b7f",
   "sha256": {
-    ".github/workflows/build.yml": "d18de170adccd1197502d6bb7411cfcbde52b54b989aa67b9825de9909e04ae5",
+    ".github/workflows/build.yml": "dbe87b03f57d425cdeb79f9dfb5ba70eb8307a27c8c67a7f9cbac8f4746826ce",
     ".gitignore": "3945b10ab016b1c9c53a18f492b7876cab70eb197360381ba3043068fa86c614",
     "C18CarrierNames.m": "867fe5a86677090ec6819628e64cf3edfa44a8884a11e3b8e1bb5be7087945f3",
     "C18CellularRate.m": "6fd570469a3d97c0d007281f674d167b09abf645cfc17c858ad4aeb02c1d4f20",
@@ -45,7 +45,7 @@
     "C18UptimeFix.m": "149e007139f892385250f6b5ddd6cc4617a746b89782086c9e1184b7c25f5bf3",
     "CCSIMModule.m": "0e35f44c74bce9b1802105c2ea0f593fb303b14571e5884b3eb43803a5d6604d",
     "POWER-FIX.md": "c9b2f82af2a9b09c71916bf31ea4c1394b60b2aad18562ae819ea15cb0d4f514",
-    "README.md": "93041c50eb12d41627e51080f0c6588569db9984f975777a89ea33a4e4d0ac71",
+    "README.md": "555a9dc4fef9051acf01df69bf9e4e279a7dcdd35c99933f34cf0ebec59bc78c",
     "Resources/C18DataSwitchGlyph.b64": "c112c7fe9306f3dac626ba22663ec6530ffbd958bbf90de4c7602ce38271c078",
     "Resources/C18DataSwitchGlyph.png": "34c2b0e4a79fa6a1b1b53f0c7e534519c4ad80bbd4c689ac58e88423fbaa6440",
     "Resources/C18PowerHelper.entitlements": "7b2cac0d475041f61be9859c8fbbf7163f5365d92df3f6f7ddba557ed41e266e",
@@ -62,7 +62,7 @@
     "Settings/C18EnableControl.h": "270c49c50b41f8a7ca7023d1a5db610e85b590058efeb5b1c3dfc64a5e0903ce",
     "Settings/C18EnableControl.m": "a3e4217a093878690160619d48f4ecee85f53a6a5ca68fe322762b049c43e27e",
     "Settings/C18FourSettings.plist": "d2cdbe5bb992358f38ee58a518e855c8a8fc29efe71ea94ada7d8fe042023dfc",
-    "Settings/C18SettingsBridge.m": "a06975698404068ba81797f0f2c8b398328b9be1c77112cd086595aebd963fce",
+    "Settings/C18SettingsBridge.m": "df6d9ea0bf5f4e2f106378ba0242c1cc88a452d01b170e8d17310e5aa3e44200",
     "Tweak.m": "4ce0ab0bf9ecdc86fe31ee0ea31787eb5a8d1f40d2463dad3c598b1946ce02f7",
     "Vendor/baseline-arm64.deb": "7968755fa82cc144c15c7b26253a44080439f24c37b9ae2eee1767b0443f6504",
     "Vendor/baseline-arm64e.deb": "200611c76e39a25f8a5c925e9f7161f1af02c507411966b1563d8aa4e8861b7f",
@@ -72,11 +72,12 @@
     "tools/package.py": "e3ac6f57bb0006b04dfd2063609e5700e6b1dd1310cc2023c6b73bc495b5f237",
     "tools/prepare_core.py": "b872886aabc5566cc335fc8a206e7d36c45451c72bb9e46c51f0185475dd9bbe",
     "tools/retained_modules.py": "c9eec1acf1fc90e8af23f23ffd7178180f2b9d49d81861920b6b10bdc4ef95b5",
+    "tools/test_enable_lifecycle.py": "bedf62998e5c8ce75523549e204d1e777edccaf5238fcf8cc99b033e8eccdd3a",
     "tools/test_module_migration.py": "cd1d4266180638a1d0164c2d1155f1a15fe8829728fc539285de81eeef478d21",
     "tools/test_power_paths.py": "65c10ff7ae5ef6fb4214ae8bfc93a004443d6ccd96ea8ffcc35548d05f0cb67d",
     "tools/test_power_root.py": "c5c25c609ac81503066138237ca5f1b4c3d51dd5f565f7da6ac484be8fab2233",
-    "tools/test_settings.py": "b76bcf8038e0162749e5ad47a6f1653cb0f939a268417bbb41feefe9b0a2d9d9",
-    "tools/verify_delivery.py": "8175bf3a2caadf5225c8d9ef89a6900aab03e9e0322fe07fe53ab17cca746fc3"
+    "tools/test_settings.py": "5f08b6d7edaa2688527e7072afb6319a54fcd5b5d3d3c2fbe64dd9c50ce3b2d9",
+    "tools/verify_delivery.py": "42fcc7cd8b51d77fc2ec0823add91c6aafdec71d94c8b512d8a4eb288d049ebd"
   },
-  "source_change": "Delete preset/import/log implementations; use a single native footer switch without altering module rows; on-device validation pending"
+  "source_change": "Standard enable switch in original PSListController specifier list; own-section module-index isolation; no footer or self-drawn cells; runtime validation pending"
 }

@@ -58,6 +58,6 @@ python3 tools/test_power_root.py
 
 上一版用户反馈四项未显示并且设置App闪退。2026-11-21 20:50:52 的真实报告为NSRangeException：`-[__NSArrayM objectAtIndex:]: index 0 beyond bounds for empty array`，异常链包含系统`ControlCenterSettings`的`_identifierAtIndexPath:`（静态+0x36b0，调用objectAtIndex）及CCSupport的cell呈现。新增分组进入系统按模块行索引的路径，是需要移除的风险点。
 
-本版完全删除PSSpecifier构造、specifiers hook、_specifiers替换及所有新增表格行／分组，改为仅在目标系统控制中心设置控制器的`viewDidLayoutSubviews`原实现之后附加一个普通UIKit footer，内含标签和UISwitch。已有footer原样保留在组合footer上方；不改dataSource、delegate、enabled/disabled数组或行索引，也不使用私有PSSpecifier工厂，避免再次走该新增设置行的越界路径。附加操作有重入保护、单次hook和镜像迟加载支持。
+本版完全删除旧PSSpecifier设置页、预设／日志和旧入口代码。启用开关直接接入`CCUISettingsListController`原始specifier列表：创建一个标准开关specifier和所属标准分组，发布回同一个`_specifiers`数组；不使用footer，不自绘行，不修改系统table dataSource/delegate或模块数组。新行通过独立动态控制器类隔离，并对自己的section拦截cell、identifier和模块索引回调，防止CCSupport把它当成模块行访问空数组；原系统模块行仍走原始实现。初始化和当前已显示页面均覆盖，避免首次进入漏显示。
 
-这是针对已确认越界路径的结构修正，不等同于已完成真机验证。双架构语法、物理删除与终包签名校验不能替代安装后的开关显示／运行态验证。构建时原库文件名`C18FourSettings`仅为同包替换兼容保留，内容只含一个开关，旧四项类和行为不会打包。
+这是针对已确认越界路径的结构修正，不等同于已完成真机验证。双架构语法、Objective-C路由模型、物理删除与终包签名校验不能替代安装后的开关显示／运行态验证。构建时原库文件名`C18FourSettings`仅为同包替换兼容保留，内容只含一个原列表开关，旧四项类和行为不会打包。

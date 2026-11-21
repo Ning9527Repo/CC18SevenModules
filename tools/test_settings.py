@@ -20,12 +20,14 @@ def main():
  from package import BASELINES,archive,deb_members
  bridge=(ROOT/'Settings/C18SettingsBridge.m').read_text()
  control=(ROOT/'Settings/C18EnableControl.m').read_text()
- assert bridge.count('_label.text=@"启用插件"')==1
- assert bridge.count('_toggle=[UISwitch new]')==1
- assert 'table.tableFooterView=footer' in bridge
- for token in ('PSSpecifier','object_setIvar','_specifiers','tableView:cellForRowAtIndexPath:','setDataSource:','setDelegate:'):
+ assert bridge.count('preferenceSpecifierNamed:@"启用插件"')==1
+ for token in ('tableFooterView','C18EnableFooter','UISwitch new','UITableView alloc','cornerRadius','addSubview:','dispatch_after','viewDidLayoutSubviews'):
   assert token not in bridge,token
- assert 'viewDidLayoutSubviews' in bridge and 'gInstalled=YES;' in bridge
+ for token in ('objc_allocateClassPair','C18EnableNativeListController','object_setClass','C18NativeSpecifiers','C18NativeOwnedSection','class_getMethodImplementation(gPSListClass,cmd)','_identifierAtIndexPath:','_isModulesSectionAtIndexPath:','cell:6 edit:Nil'):
+  assert token in bridge,token
+ callback=bridge.split('static void C18NativeImageAdded(',1)[1].split('__attribute__',1)[0]
+ assert 'C18NativeInstall();' in callback and 'dispatch_async' not in callback
+ assert 'state.published=result' in bridge and 'object_setIvar(host,ivar,result)' in bridge
  for token in ('savePreset','importPreset','showLogs','UIDocumentPicker','C18LogListController','C18LogDetailController','UIActivityViewController','setButtonAction','C18FourButton'):
   assert token not in bridge+control,token
  for old in ('C18SettingsActions.h','C18SettingsActions.m'):

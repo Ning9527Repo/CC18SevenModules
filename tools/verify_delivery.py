@@ -31,8 +31,10 @@ def verify():
             names=[folder+n for n in ('ControlCenter18.dylib','ControlCenter18Modules.dylib','C18ConnectivityFive.dylib')]
             names.append(folder+'C18FourSettings.dylib')
             adapter=data[folder+'C18FourSettings.dylib'][1]
-            for token in (b'C18PRootListController',b'C18PHeaderView',b'openDeveloper:',b'C18SettingsActions',b'C18LogListController',b'C18LogDetailController',b'savePreset:',b'importPreset:',b'showLogs:',b'UIDocumentPickerViewController',b'preferenceSpecifierNamed:target:set:get:detail:cell:edit:'):
+            for token in (b'C18PRootListController',b'C18PHeaderView',b'openDeveloper:',b'C18SettingsActions',b'C18LogListController',b'C18LogDetailController',b'savePreset:',b'importPreset:',b'showLogs:',b'UIDocumentPickerViewController',b'C18EnableFooter',b'tableFooterView'):
                 assert token not in adapter,'old unwanted preference code included'
+            for token in (b'C18EnableNativeListController',b'_identifierAtIndexPath:',b'preferenceSpecifierNamed:target:set:get:detail:cell:edit:'):
+                assert token in adapter,'native list integration missing'
             helper=prefix+'usr/libexec/C18PowerHelper'
             helper_info,helper_content=data[helper]
             assert helper_info.isfile() and helper_info.mode==0o4755 and helper_info.uid==helper_info.gid==0

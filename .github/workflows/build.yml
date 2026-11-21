@@ -15,7 +15,9 @@ jobs:
           python3 tools/retained_modules.py
           python3 tools/test_module_migration.py
       - name: Verify one native enable switch and old preference-page removal
-        run: python3 tools/test_settings.py
+        run: |
+          python3 tools/test_settings.py
+          python3 tools/test_enable_lifecycle.py
       - name: Check four-action backend and obsolete UI deletion
         run: python3 tools/test_power_root.py
       - name: Compile and sign companion
