@@ -13,8 +13,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 VERSION = "1.0"
 BASELINES = (
-    ("arm64", "var/jb/", "88d989cd8f877e4413c2797395d7537a73dc0b7649896e9b1bb18ef659db0863"),
-    ("arm64e", "", "ff666060906572b341146f184e10af51c1995a4dfe064c9a9f3cd77e3f9233cc"),
+    ("arm64", "var/jb/", "7968755fa82cc144c15c7b26253a44080439f24c37b9ae2eee1767b0443f6504"),
+    ("arm64e", "", "200611c76e39a25f8a5c925e9f7161f1af02c507411966b1563d8aa4e8861b7f"),
 )
 XZ_FILTERS = [{"id": lzma.FILTER_LZMA2, "preset": 9 | lzma.PRESET_EXTREME,
                "dict_size": 32 * 1024 * 1024}]
@@ -22,22 +22,11 @@ SLIM_REMOVE_SUFFIXES = (".png", ".jpg", ".jpeg")
 
 
 def slim_remove(name):
-    # Restore only the settings entry icon and the page header, at all scales.
-    prefs = "Library/PreferenceBundles/ControlCenter18Prefs.bundle/"
-    restored = {prefs + filename for filename in (
-        "icon.png", "icon@2x.png", "icon@3x.png",
-        "header-icon.png", "header-icon@2x.png", "header-icon@3x.png",
-    )}
-    if name.removeprefix("var/jb/") in restored:
-        return False
     # RootHide paths start at Library; rootless paths include var/jb/.
     return (("/Library/Application Support/ControlCenter18/Settings18/" in name or
              name.startswith("Library/Application Support/ControlCenter18/Settings18/")) or
             ("/Library/Application Support/ControlCenter18/AVControls18.bundle/Mic Modes Visualizer.ca/" in name or
-             name.startswith("Library/Application Support/ControlCenter18/AVControls18.bundle/Mic Modes Visualizer.ca/")) or
-            (("/Library/PreferenceBundles/ControlCenter18Prefs.bundle/" in name or
-              name.startswith("Library/PreferenceBundles/ControlCenter18Prefs.bundle/")) and
-             name.lower().endswith(SLIM_REMOVE_SUFFIXES)))
+             name.startswith("Library/Application Support/ControlCenter18/AVControls18.bundle/Mic Modes Visualizer.ca/")))
 
 
 def deb_members(blob):
@@ -97,25 +86,6 @@ def install_power_helper(entries, prefix, content):
     info.size = len(content)
     entries[name] = (info, content)
     return name
-
-
-def remove_prefs_group_localizations(entries, prefix):
-    prefs = prefix + 'Library/PreferenceBundles/ControlCenter18Prefs.bundle/'
-    changed = set()
-    for name, (info, content) in list(entries.items()):
-        if not (name.startswith(prefs) and name.endswith('.lproj/Localizable.strings') and content):
-            continue
-        strings = plistlib.loads(content)
-        assert isinstance(strings, dict) and all(k in strings for k in ('REPOSITORY', 'DEVELOPERS'))
-        before = dict(strings)
-        for key in ('REPOSITORY', 'DEVELOPERS'):
-            del strings[key]
-        assert all(strings[k] == value for k, value in before.items() if k not in ('REPOSITORY', 'DEVELOPERS'))
-        fmt = plistlib.FMT_BINARY if content.startswith(b'bplist00') else plistlib.FMT_XML
-        replace_content(entries, name, plistlib.dumps(strings, fmt=fmt, sort_keys=False))
-        changed.add(name)
-    assert len(changed) == 4, 'Unexpected settings language resource list'
-    return changed
 
 
 def serialize(entries, compressed=False):
@@ -202,26 +172,29 @@ def main():
             assert core_record['runtime_sections_unchanged'] and core_record['macos_codesign_strict_all_architectures']
             replace_content(data, core, signed_core)
             cores.add(core)
-        prefs = prefix + 'Library/PreferenceBundles/ControlCenter18Prefs.bundle/ControlCenter18Prefs'
-        signed_prefs = (ROOT / f'build/Prefs-{arch}.dylib').read_bytes()
-        report = __import__('json').loads((ROOT / 'build/prefs-cleanup.json').read_text())
-        record = next(r for r in report if r['arch'] == arch)
-        assert hashlib.sha256(signed_prefs).hexdigest() == record['signed_sha256']
-        assert record['macos_codesign_strict_all_architectures'] is True
-        replace_content(data, prefs, signed_prefs)
-        cleaned_strings = remove_prefs_group_localizations(data, prefix)
-        assert data.keys() == (original.keys() - slim_removed) | helper_added | {target}
+        settings_added = set()
+        for filename, source, mode in (
+            ('C18FourSettings.dylib', ROOT/'build/C18FourSettings.dylib', 0o755),
+            ('C18FourSettings.plist', ROOT/'Settings/C18FourSettings.plist', 0o644),
+        ):
+            name = folder + filename
+            assert name not in data
+            content = source.read_bytes()
+            info = tarfile.TarInfo(name)
+            info.uid = info.gid = 0
+            info.uname, info.gname = 'root', 'wheel'
+            info.mode, info.size = mode, len(content)
+            data[name] = (info, content)
+            settings_added.add(name)
+        assert data.keys() == (original.keys() - slim_removed) | helper_added | {target} | settings_added
         from retained_modules import verify_retained_entries
         verify_retained_entries(data, prefix)
-        assert all(data[name] == original[name] for name in data if name not in ({target, prefs} | cores | cleaned_strings | helper_added)), "Overlay escaped reviewed scope"
+        assert all(data[name] == original[name] for name in data if name not in ({target} | cores | settings_added | helper_added)), "Overlay escaped reviewed scope"
+        from test_settings import verify_settings_entries
+        verify_settings_entries(data, prefix, require_adapter=True)
         helper_info, helper_bytes = data[helper]
         assert helper_info.uid == helper_info.gid == 0 and helper_info.mode == 0o4755
         assert helper_bytes == (ROOT / 'build/C18PowerHelper').read_bytes()
-        # These are the original two image families, not substitute artwork.
-        for filename in ('icon.png', 'icon@2x.png', 'icon@3x.png',
-                         'header-icon.png', 'header-icon@2x.png', 'header-icon@3x.png'):
-            name = prefix + 'Library/PreferenceBundles/ControlCenter18Prefs.bundle/' + filename
-            assert data[name] == original[name]
 
         # Compute this only after all payload changes; preserve every other control byte.
         old_control = control["control"][1]

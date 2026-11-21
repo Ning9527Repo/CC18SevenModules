@@ -2,7 +2,7 @@
 """Renew the pinned core's ad-hoc requirements without changing section bytes."""
 import hashlib,json,platform,struct,subprocess
 from package import ROOT,BASELINES,archive,deb_members
-from prefs_cleanup import slices
+from macho_layout import slices
 
 
 def sections(blob):

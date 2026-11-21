@@ -1,4 +1,4 @@
-name: Build CC18 seven-module edition 1.0
+name: Build CC18 1.0 eight modules and four native settings
 on:
   workflow_dispatch:
 permissions:
@@ -10,12 +10,12 @@ jobs:
       - uses: actions/checkout@v4
       - name: Check reviewed source
         run: python3 tools/check_source.py
-      - name: Verify seven physical modules and migration policy
+      - name: Verify eight physical modules and migration policy
         run: |
           python3 tools/retained_modules.py
           python3 tools/test_module_migration.py
-      - name: Check settings row removal and icons
-        run: python3 tools/test_prefs.py
+      - name: Verify four native settings and old preference-page removal
+        run: python3 tools/test_settings.py
       - name: Check four-action backend and obsolete UI deletion
         run: python3 tools/test_power_root.py
       - name: Compile and sign companion
@@ -50,8 +50,22 @@ jobs:
           xcrun lipo -create -output build/C18PowerHelper build/C18PowerHelper-arm64 build/C18PowerHelper-arm64e
           codesign --force --sign - --timestamp=none --entitlements Resources/C18PowerHelper.entitlements build/C18PowerHelper
           codesign --verify --strict --all-architectures build/C18PowerHelper
-      - name: Remove three settings rows and sign Prefs
-        run: python3 tools/prepare_prefs.py
+      - name: Compile and sign four-function native Settings adapter
+        shell: bash
+        run: |
+          set -euo pipefail
+          SDK="$(xcrun --sdk iphoneos --show-sdk-path)"
+          for ARCH in arm64 arm64e; do
+            xcrun --sdk iphoneos clang -fobjc-arc -fblocks -O2 -Wall -Wextra -Werror \
+              -isysroot "$SDK" -target "${ARCH}-apple-ios15.0" -dynamiclib -I. \
+              -framework Foundation -framework UIKit -framework UniformTypeIdentifiers -framework CoreFoundation \
+              -Wl,-undefined,dynamic_lookup -Wl,-install_name,@loader_path/C18FourSettings.dylib \
+              Settings/C18SettingsActions.m Settings/C18SettingsBridge.m -o "build/C18FourSettings-${ARCH}.dylib"
+            xcrun strip -x "build/C18FourSettings-${ARCH}.dylib"
+          done
+          xcrun lipo -create -output build/C18FourSettings.dylib build/C18FourSettings-arm64.dylib build/C18FourSettings-arm64e.dylib
+          codesign --force --sign - --timestamp=none build/C18FourSettings.dylib
+          codesign --verify --strict --all-architectures build/C18FourSettings.dylib
       - name: Renew pinned core signature requirements
         run: python3 tools/prepare_core.py
       - name: Package both user baselines
@@ -60,7 +74,7 @@ jobs:
         run: python3 tools/verify_delivery.py
       - uses: actions/upload-artifact@v4
         with:
-          name: CC18SevenModules-1.0
+          name: CC18-1.0-eight-modules-four-settings
           path: |
             dist/com.evgeniy558.controlcenter18_1.0_iphoneos-arm64.deb
             dist/com.evgeniy558.controlcenter18_1.0_iphoneos-arm64e.deb

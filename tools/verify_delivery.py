@@ -4,6 +4,7 @@ import hashlib,json,platform,plistlib,struct,subprocess,tempfile
 from pathlib import Path
 from package import ROOT,VERSION,BASELINES,deb_members,archive
 from retained_modules import verify_retained_entries
+from test_settings import verify_settings_entries
 
 
 def verify():
@@ -16,6 +17,7 @@ def verify():
             data=archive(next(v for k,v in members.items() if k.startswith('data.tar')))
             control=archive(next(v for k,v in members.items() if k.startswith('control.tar')))
             retained=verify_retained_entries(data,prefix)
+            settings=verify_settings_entries(data,prefix,require_adapter=True)
             metadata=control['control'][1]
             assert f'Architecture: iphoneos-{arch}'.encode() in metadata
             assert f'Version: {VERSION}'.encode() in metadata
@@ -27,7 +29,10 @@ def verify():
             assert b'C18PowerSafe' not in companion and b'.C18SafeMode' not in companion
             assert '安全模式'.encode('utf-16le') not in companion
             names=[folder+n for n in ('ControlCenter18.dylib','ControlCenter18Modules.dylib','C18ConnectivityFive.dylib')]
-            names.append(prefix+'Library/PreferenceBundles/ControlCenter18Prefs.bundle/ControlCenter18Prefs')
+            names.append(folder+'C18FourSettings.dylib')
+            adapter=data[folder+'C18FourSettings.dylib'][1]
+            for token in (b'C18PRootListController',b'C18PHeaderView',b'openDeveloper:'):
+                assert token not in adapter,'old unwanted preference code included'
             helper=prefix+'usr/libexec/C18PowerHelper'
             helper_info,helper_content=data[helper]
             assert helper_info.isfile() and helper_info.mode==0o4755 and helper_info.uid==helper_info.gid==0
@@ -50,7 +55,7 @@ def verify():
                     expected=plistlib.loads((ROOT/'Resources/C18PowerHelper.entitlements').read_bytes())
                     assert all(actual.get(k)==v for k,v in expected.items()), 'Missing power helper entitlement'
                 programs.append({'name':name,'sha256':hashlib.sha256(content).hexdigest(),'subtypes':[hex(n) for n in subtypes],'codesign_strict_all_architectures':True})
-            report={'file':path.name,'bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest(),'arch':arch,'programs':programs,'retained_modules':retained,'device_tested':False}
+            report={'file':path.name,'bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest(),'arch':arch,'programs':programs,'retained_modules':retained,'four_settings':settings,'device_tested':False}
             reports.append(report)
             print('FINAL_PACKAGE_VERIFIED',json.dumps(report),flush=True)
     (ROOT/'build/package-validation.json').write_text(json.dumps(reports,indent=2)+'\n')

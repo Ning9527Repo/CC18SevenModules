@@ -7,7 +7,7 @@ header=(ROOT/'C18RemovedModules.h').read_text();source=(ROOT/'C18FiveConfig.m').
 records=json.loads((ROOT/'Vendor/retained-seven.json').read_text())[0]
 removed=[m['identifier'] for m in records['removed_modules']];kept=[m['identifier'] for m in records['kept_modules']]
 rows={(int(n),int(h,16)) for n,h in re.findall(r'\{(\d+),UINT64_C\((0x[0-9a-f]+)\)\}',header)}
-assert len(removed)==23 and len(kept)==7 and len(rows)==26
+assert len(removed)==22 and len(kept)==8 and len(rows)==25
 @lru_cache(None)
 def matches(value):
  if not isinstance(value,str):return False
@@ -41,4 +41,4 @@ for _ in range(10000):
  for old,new in zip(slots,out):
   if old.startswith('module:') and matches(old[7:]):assert new in builtins and new not in slots
   else:assert old==new
-print('MIGRATION_MODEL_OK: 23 removed IDs, seven retained IDs, instance suffixes, 10000 slot configurations; not iOS runtime')
+print('MIGRATION_MODEL_OK: 22 removed IDs, eight retained IDs, instance suffixes, 10000 slot configurations; not iOS runtime')

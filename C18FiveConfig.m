@@ -42,7 +42,7 @@ static NSString *C18FiveChineseTitle(NSString *identifier, NSString *fallback, N
         @"com.apple.control-center.AccessibilityShortcutsModule":@"辅助功能快捷键",
         @"com.apple.control-center.VoiceMemosModule":@"语音备忘录",
         @"com.apple.control-center.MusicRecognitionModule":@"音乐识别",
-        @"netskao.ccbadgeclear":@"清理角标",
+        @"netskao.ccbadgeclear":@"清理角标", @"com.skypain.ccrespring":@"注销",
         @"netskao.cccellularratemodule":@"蜂窝4/5G切换", @"netskao.ccsim":@"蜂窝管理",
         @"netskao.ccswitchdatamodule":@"数据切换", @"com.skypain.ccvpn":@"CC VPN",
         @"com.mtac.uptimemodule":@"开机计时", @"com.sop.cpumagicrootless":@"实时 CPU"

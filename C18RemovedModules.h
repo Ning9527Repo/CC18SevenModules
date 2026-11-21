@@ -19,7 +19,7 @@ static inline BOOL C18RemovedModuleID(id identifier) {
         // Preserve the two pre-existing migration identities.
         {40,UINT64_C(0x71bd801d90079b01)},
         {34,UINT64_C(0x3d4d019b04cfd5ea)},
-        // The 23 removed bundle identities from the baseline package Info.plists.
+        // The 22 removed bundle identities from the baseline package Info.plists.
         {43,UINT64_C(0x937e447a9903d4db)},
         {45,UINT64_C(0x7028c5755344676d)},
         {43,UINT64_C(0x145de2781bbae4be)},
@@ -35,7 +35,6 @@ static inline BOOL C18RemovedModuleID(id identifier) {
         {28,UINT64_C(0x2eb52b3d13963ec8)},
         {45,UINT64_C(0x601cc743834e49f3)},
         {18,UINT64_C(0x9c92823d177bf36b)},
-        {22,UINT64_C(0x28abd61fecf1df3b)},
         {46,UINT64_C(0x86e43e80d1757a7d)},
         {44,UINT64_C(0x22f2c9674a7df5c5)},
         {28,UINT64_C(0xeb3fffec1caba15b)},
