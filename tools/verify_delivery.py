@@ -2,7 +2,7 @@
 """Verify final deb bytes, primary Mach-O architectures and macOS signatures."""
 import hashlib,json,platform,plistlib,struct,subprocess,tempfile
 from pathlib import Path
-from package import ROOT,VERSION,BASELINES,deb_members,archive
+from package import ROOT,VERSION,PACKAGE_ID,LEGACY_PACKAGE_ID,BASELINES,deb_members,archive
 from retained_modules import verify_retained_entries
 from test_settings import verify_settings_entries
 
@@ -12,7 +12,7 @@ def verify():
     reports=[]
     with tempfile.TemporaryDirectory(prefix='c18-final-signatures-') as temporary:
         for arch,prefix,_ in BASELINES:
-            path=ROOT/'dist'/f'com.evgeniy558.controlcenter18_{VERSION}_iphoneos-{arch}.deb'
+            path=ROOT/'dist'/f'{PACKAGE_ID}_{VERSION}_iphoneos-{arch}.deb'
             raw=path.read_bytes();members=deb_members(raw)
             data=archive(next(v for k,v in members.items() if k.startswith('data.tar')))
             control=archive(next(v for k,v in members.items() if k.startswith('control.tar')))
@@ -21,6 +21,11 @@ def verify():
             metadata=control['control'][1]
             assert f'Architecture: iphoneos-{arch}'.encode() in metadata
             assert f'Version: {VERSION}'.encode() in metadata
+            fields=dict(line.split(b':',1) for line in metadata.splitlines() if b':' in line)
+            assert fields[b'Package'].strip()==PACKAGE_ID.encode()
+            assert fields[b'Author'].strip()==fields[b'Maintainer'].strip()==b'Ning'
+            assert fields[b'Name'].strip()==b'ControlCenter18'
+            for field in (b'Conflicts',b'Replaces',b'Provides'):assert LEGACY_PACKAGE_ID.encode() in fields[field]
             folder=prefix+'Library/MobileSubstrate/DynamicLibraries/'
             assert not any(folder+n in data for n in ('C18PowerMenu.dylib','C18PowerMenu.plist','C18PowerMenu.dylib.roothidepatch'))
             companion=data[folder+'C18ConnectivityFive.dylib'][1]

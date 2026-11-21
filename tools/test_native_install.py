@@ -26,7 +26,7 @@ for m in re.finditer(pattern,s):
  selector=m[1] or m[2];args=re.findall(r'@"([^"]+)"',m[4])
  assert accepts(selector,m[3],args),(selector,methods[selector]['encoding'],m[3],args)
  checks+=1
-assert checks==4,checks
+assert checks==6,checks
 assert methods['_identifiersInSection:']['encoding']=='@24@0:8Q16'
 assert not accepts('_identifiersInSection:','@',['q']),'previous broken bootstrap must be rejected'
 assert accepts('_identifiersInSection:','@',['Q'])

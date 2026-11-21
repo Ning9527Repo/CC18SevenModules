@@ -1,7 +1,7 @@
 {
   "version": "1.0",
   "repository": "Ning9527Repo/CC18SevenModules",
-  "based_on_own_commit": "c8ee434e2ceef7238870228cc7ac4a0b0eae1659",
+  "based_on_own_commit": "eae6da51b78d4db2c34b2f65ac483684226d9458",
   "original_repository_unchanged_commit": "7f06b36409d4145457947f25f1d4f473a636bb2e",
   "retained_third_party_modules": 8,
   "removed_third_party_modules": 22,
@@ -9,7 +9,7 @@
   "baseline_arm64_sha256": "7968755fa82cc144c15c7b26253a44080439f24c37b9ae2eee1767b0443f6504",
   "baseline_arm64e_sha256": "200611c76e39a25f8a5c925e9f7161f1af02c507411966b1563d8aa4e8861b7f",
   "sha256": {
-    ".github/workflows/build.yml": "e9b97519340861d28fa68577ea57d1ab7df21150736be1e88bebe2d116343ff8",
+    ".github/workflows/build.yml": "a5ede22cc157826fad2ee2e5b98f003e60a9a666feb8a34e56b6ab715f63a723",
     ".gitignore": "3945b10ab016b1c9c53a18f492b7876cab70eb197360381ba3043068fa86c614",
     "C18CarrierNames.m": "867fe5a86677090ec6819628e64cf3edfa44a8884a11e3b8e1bb5be7087945f3",
     "C18CellularRate.m": "6fd570469a3d97c0d007281f674d167b09abf645cfc17c858ad4aeb02c1d4f20",
@@ -45,7 +45,7 @@
     "C18UptimeFix.m": "149e007139f892385250f6b5ddd6cc4617a746b89782086c9e1184b7c25f5bf3",
     "CCSIMModule.m": "0e35f44c74bce9b1802105c2ea0f593fb303b14571e5884b3eb43803a5d6604d",
     "POWER-FIX.md": "c9b2f82af2a9b09c71916bf31ea4c1394b60b2aad18562ae819ea15cb0d4f514",
-    "README.md": "4d11da8fbd16a0fb48b1130c118e0b3d47e1c2edea18f6f1ab3dea8f5d1fd7a8",
+    "README.md": "67f73805c0a158326f7df75dfacf3408543707c499f892e738b3fa3ce48ef79f",
     "Resources/C18DataSwitchGlyph.b64": "c112c7fe9306f3dac626ba22663ec6530ffbd958bbf90de4c7602ce38271c078",
     "Resources/C18DataSwitchGlyph.png": "34c2b0e4a79fa6a1b1b53f0c7e534519c4ad80bbd4c689ac58e88423fbaa6440",
     "Resources/C18PowerHelper.entitlements": "7b2cac0d475041f61be9859c8fbbf7163f5365d92df3f6f7ddba557ed41e266e",
@@ -62,7 +62,7 @@
     "Settings/C18EnableControl.h": "270c49c50b41f8a7ca7023d1a5db610e85b590058efeb5b1c3dfc64a5e0903ce",
     "Settings/C18EnableControl.m": "a3e4217a093878690160619d48f4ecee85f53a6a5ca68fe322762b049c43e27e",
     "Settings/C18FourSettings.plist": "d2cdbe5bb992358f38ee58a518e855c8a8fc29efe71ea94ada7d8fe042023dfc",
-    "Settings/C18SettingsBridge.m": "cf7513a69aa786a4c8886f29892da68bed5c3375ca9181d63df5605ecabb9bb3",
+    "Settings/C18SettingsBridge.m": "b6c73d894392ba99a91cb8c3a75907dfca5363888ed00bd9a5c2482c1a5dbb69",
     "Tweak.m": "4ce0ab0bf9ecdc86fe31ee0ea31787eb5a8d1f40d2463dad3c598b1946ce02f7",
     "Vendor/baseline-arm64.deb": "7968755fa82cc144c15c7b26253a44080439f24c37b9ae2eee1767b0443f6504",
     "Vendor/baseline-arm64e.deb": "200611c76e39a25f8a5c925e9f7161f1af02c507411966b1563d8aa4e8861b7f",
@@ -70,16 +70,17 @@
     "tools/check_source.py": "bd439ee302214d0c46da93ae0acc774f76a509d8ab1bc2b553cc41deed0dfd0d",
     "tools/fixtures/controlcenter-settings-17.2.1-abi.json": "0c8e8e1e839f52a103eacc3c0fe0b4bb2c1fc7df70dc0a615832399c89b50b0e",
     "tools/macho_layout.py": "a0cb96f31b5b4d191b1854183bb96d05f438e206105cd4efe47131b2fe75b0e4",
-    "tools/package.py": "e3ac6f57bb0006b04dfd2063609e5700e6b1dd1310cc2023c6b73bc495b5f237",
+    "tools/package.py": "a3bd708b81751ce579ce4a22ddf1e54829fcf25757d7568693dc522be1403641",
     "tools/prepare_core.py": "b872886aabc5566cc335fc8a206e7d36c45451c72bb9e46c51f0185475dd9bbe",
     "tools/retained_modules.py": "c9eec1acf1fc90e8af23f23ffd7178180f2b9d49d81861920b6b10bdc4ef95b5",
     "tools/test_enable_lifecycle.py": "37a317e69f6e3fc7a84fc5a52cbe42580623f10f68194a0cb6cea8697e4edccb",
     "tools/test_module_migration.py": "cd1d4266180638a1d0164c2d1155f1a15fe8829728fc539285de81eeef478d21",
-    "tools/test_native_install.py": "326eb77509e032e849eb1b463d83a277ea6fa013de2deb77812932c44e95ec7c",
+    "tools/test_native_access.py": "4e1736f74d120bf37364bf646e44a60c56c67482e65b39dfca48e652b7eec17c",
+    "tools/test_native_install.py": "929dce84afcf814eb16994c6d0ef54a576df0fabffdb3b7962133edc6e8bd424",
     "tools/test_power_paths.py": "65c10ff7ae5ef6fb4214ae8bfc93a004443d6ccd96ea8ffcc35548d05f0cb67d",
     "tools/test_power_root.py": "c5c25c609ac81503066138237ca5f1b4c3d51dd5f565f7da6ac484be8fab2233",
     "tools/test_settings.py": "761ac3fb69fb556b25be5dd54281af76efe6f6dd38e6141186480bc5d9af9aed",
-    "tools/verify_delivery.py": "42fcc7cd8b51d77fc2ec0823add91c6aafdec71d94c8b512d8a4eb288d049ebd"
+    "tools/verify_delivery.py": "1425d987c95a79e70c593e0cc79fc507f20fa57da9357a43bd8f51cc694ba77c"
   },
-  "source_change": "Fix definite bootstrap early return: actual device _identifiersInSection: uses NSUInteger Q; preserve native list and bounds guards; add bootstrap ABI fixture/test; UIKit runtime pending"
+  "source_change": "Restore native controller resource class identity and missing system access switch with original callbacks; requested author/package ID only; UIKit runtime pending"
 }

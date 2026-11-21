@@ -62,4 +62,6 @@ python3 tools/test_power_root.py
 
 用户23:49截图仍无开关。进一步直接解析本机`ControlCenterSettings`的ObjC方法表：`_identifiersInSection:`在0x3580，真实编码为`@24@0:8Q16`，参数是`NSUInteger`；上一版却要求`q`，严格ABI门控必然提前返回，连原列表子类／init hook都未安装。本次只修正此处为`Q`及对应`NSUInteger`调用，并加入本机方法编码fixture、覆盖安装门控的CI回归，避免只测已安装后的行路由。原列表开关／空数组保护、八模块及删除范围保持不变。
 
-这是针对已确认启动阻断与越界路径的结构修正，不等同于已完成真机验证。双架构语法、Objective-C路由模型、物理删除与终包签名校验不能替代安装后的开关显示／运行态验证。构建时原库文件名`C18FourSettings`仅为同包替换兼容保留，内容只含一个原列表开关，旧四项类和行为不会打包。
+用户随后真机确认新增启用开关显示且有效，但原“App内访问”行消失、其说明仍在。本轮保留动态子类的原系统`class`资源身份；原访问行存在时保持同一对象，缺失时仅在原访问分组后补一个标准PSSwitchCell，仍调用系统`allowedWithinApps:`／`setAllowedWithinApps:specifier:`，不写插件偏好、不重建整页。新增开关、还原、8模块及旧越界保护不变。包显示名仍为ControlCenter18；按本轮要求Author/Maintainer为Ning，Package改为com.ning.controlcenter18，通过Conflicts/Replaces/Provides替换旧ID，运行时旧偏好域保持兼容。未上源。
+
+这是针对已确认启动阻断与越界路径及原生访问行回归的修正，不等同于已完成真机验证。双架构语法、Objective-C路由模型、物理删除与终包签名校验不能替代安装后的开关显示／运行态验证。构建时原库文件名`C18FourSettings`仅为同包替换兼容保留，内容只含一个原列表开关，旧四项类和行为不会打包。

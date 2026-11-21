@@ -12,6 +12,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 VERSION = "1.0"
+PACKAGE_ID = "com.ning.controlcenter18"
+LEGACY_PACKAGE_ID = "com.evgeniy558.controlcenter18"
 BASELINES = (
     ("arm64", "var/jb/", "7968755fa82cc144c15c7b26253a44080439f24c37b9ae2eee1767b0443f6504"),
     ("arm64e", "", "200611c76e39a25f8a5c925e9f7161f1af02c507411966b1563d8aa4e8861b7f"),
@@ -207,8 +209,20 @@ def main():
         new_control, count = re.subn(br"(?m)^Installed-Size:[^\r\n]*",
                                     f"Installed-Size: {installed_size}".encode(), old_control)
         assert count == 1, "Expected exactly one Installed-Size field"
+        # User-requested metadata only. Keep Name, preference domains, module
+        # identifiers and injected paths unchanged; prevent dual engine loads.
+        for key,value in (("Package",PACKAGE_ID),("Author","Ning"),("Maintainer","Ning")):
+            new_control,n=re.subn(rb"(?m)^"+key.encode()+rb":[^\r\n]*",(key+": "+value).encode(),new_control)
+            assert n==1,key
+        for key in ("Conflicts","Replaces","Provides"):
+            existing=fields.get(key.encode(),b"").decode().strip()
+            values=[v.strip() for v in existing.split(',') if v.strip()]
+            if LEGACY_PACKAGE_ID not in values:values.append(LEGACY_PACKAGE_ID)
+            line=(key+": "+', '.join(values)).encode()
+            if key.encode() in fields:new_control,n=re.subn(rb"(?m)^"+key.encode()+rb":[^\r\n]*",line,new_control);assert n==1
+            else:new_control=new_control.rstrip(b'\n')+b'\n'+line+b'\n'
         replace_content(control, "control", new_control)
-        out = dist / f"com.evgeniy558.controlcenter18_{VERSION}_iphoneos-{arch}.deb"
+        out = dist / f"{PACKAGE_ID}_{VERSION}_iphoneos-{arch}.deb"
         write_deb(out, serialize(control, compressed=True), compress_data(serialize(data)))
         print(out.relative_to(ROOT), out.stat().st_size, hashlib.sha256(out.read_bytes()).hexdigest())
 

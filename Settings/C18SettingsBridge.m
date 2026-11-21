@@ -13,6 +13,7 @@ extern void MSHookMessageEx(Class,SEL,IMP,IMP *);
 + (id)preferenceSpecifierNamed:(NSString *)name target:(id)target set:(SEL)set get:(SEL)get detail:(Class)detail cell:(NSInteger)cell edit:(Class)edit;
 - (void)setProperty:(id)value forKey:(NSString *)key;
 - (id)propertyForKey:(NSString *)key;
+- (NSString *)identifier;
 - (NSInteger)cellType;
 @end
 @interface C18NativeListState : NSObject
@@ -84,6 +85,32 @@ static NSInteger C18NativeCellType(id specifier) {
     if(C18HookSignatureMatches(m,"i",@[]))return ((int(*)(id,SEL))objc_msgSend)(specifier,@selector(cellType));
     return NSNotFound;
 }
+static Class C18NativeReportedClass(id host,SEL cmd) {
+    (void)host;(void)cmd;
+    // Preferences derives its plist/localization bundle from [self class].
+    // Preserve the system resource identity while retaining the routing isa.
+    return gHostClass;
+}
+static void C18NativeRestoreAccess(NSMutableArray *rows,id host) {
+    NSUInteger groupIndex=NSNotFound;
+    BOOL hasAccess=NO;
+    for(NSUInteger index=0;index<rows.count;index++) {
+        C18NativeSpecifier *row=rows[index];
+        NSString *identifier=[row identifier];
+        if([identifier isEqualToString:@"ALLOWED_WITHIN_APPS"])hasAccess=YES;
+        if([identifier isEqualToString:@"C18_ACCESS_GROUP"] ||
+           [identifier isEqualToString:@"ALLOWED_WITHIN_APPS_FOOTER"])groupIndex=index;
+    }
+    if(hasAccess || groupIndex==NSNotFound)return;
+    // Retain an existing native switch unchanged. Only repair an empty access
+    // group, using Apple's original get/set callbacks, never a private default.
+    NSBundle *bundle=[NSBundle bundleForClass:gHostClass];
+    NSString *title=[bundle localizedStringForKey:@"ALLOWED_WITHIN_APPS" value:@"App 内访问" table:@"ControlCenterSettings"];
+    C18NativeSpecifier *access=[gSpecifierClass preferenceSpecifierNamed:title target:host set:sel_registerName("setAllowedWithinApps:specifier:") get:sel_registerName("allowedWithinApps:") detail:Nil cell:6 edit:Nil];
+    if(!access)return;
+    [access setProperty:@"ALLOWED_WITHIN_APPS" forKey:@"id"];
+    [rows insertObject:access atIndex:groupIndex+1];
+}
 static id C18NativeSpecifiers(id host,SEL command) {
     C18NativeListState *state=C18NativeState(host);
     if(state.reading){
@@ -107,6 +134,7 @@ static id C18NativeSpecifiers(id host,SEL command) {
         if(C18NativeCellType(state.group)!=0 || C18NativeCellType(state.toggle)!=6)return original;
         for(id existing in original)if(C18NativeCellType(existing)==NSNotFound)return original;
         NSMutableArray *result=[original isKindOfClass:NSMutableArray.class]?original:[original mutableCopy];
+        C18NativeRestoreAccess(result,host);
         BOOL hasGroup=[result indexOfObjectIdenticalTo:state.group]!=NSNotFound;
         BOOL hasToggle=[result indexOfObjectIdenticalTo:state.toggle]!=NSNotFound;
         if(hasGroup!=hasToggle){[result removeObjectIdenticalTo:state.group];[result removeObjectIdenticalTo:state.toggle];hasGroup=hasToggle=NO;}
@@ -221,13 +249,17 @@ static void C18NativeInstall(void) {
        !C18HookCanInstall(spec,sel_registerName("propertyForKey:"),"@",@[@"@"]) ||
        // Device ControlCenterSettings: @24@0:8Q16 (NSUInteger), not q.
        !C18HookCanInstall(host,sel_registerName("_identifiersInSection:"),"@",@[@"Q"]) ||
-       !objc_getClass("CCUISettingsListCell"))return;
+       !objc_getClass("CCUISettingsListCell") ||
+       !C18HookCanInstall(host,sel_registerName("allowedWithinApps:"),"@",@[@"@"]) ||
+       !C18HookCanInstall(host,sel_registerName("setAllowedWithinApps:specifier:"),"v",@[@"@",@"@"]) ||
+       !C18HookCanInstall(spec,sel_registerName("identifier"),"@",@[]))return;
     gHostClass=host;gSpecifierClass=spec;gPSListClass=base;
     if(!C18NativeFactoryValid()||!C18HookSignatureMatches(class_getClassMethod(spec,@selector(groupSpecifierWithName:)),"@",@[@"@"])||!C18HookCanInstall(spec,@selector(setProperty:forKey:),"v",@[@"@",@"@"]))return;
     BOOL expected=NO;if(!atomic_compare_exchange_strong(&gInstalled,&expected,true))return;
     gNativeSubclass=objc_allocateClassPair(host,"C18EnableNativeListController",0);
     if(!gNativeSubclass)return;
-    BOOL ok=C18NativeAdd(sel_registerName("specifiers"),(IMP)C18NativeSpecifiers,"@",@[],YES);
+    BOOL ok=C18NativeAdd(@selector(class),(IMP)C18NativeReportedClass,"#",@[],YES);
+    ok=ok&&C18NativeAdd(sel_registerName("specifiers"),(IMP)C18NativeSpecifiers,"@",@[],YES);
     ok=ok&&C18NativeAdd(cell,(IMP)C18NativeCell,"@",@[@"@",@"@"],YES);
     for(NSString *s in @[@"_isEnabledModulesSectionAtIndexPath:",@"_isDisabledModulesSectionAtIndexPath:",@"_isModulesSectionAtIndexPath:"])
         ok=ok&&C18NativeAdd(NSSelectorFromString(s),(IMP)C18NativeModuleSection,"B",@[@"@"],YES);
