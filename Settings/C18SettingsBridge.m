@@ -12,6 +12,7 @@ extern void MSHookMessageEx(Class,SEL,IMP,IMP *);
 + (id)groupSpecifierWithName:(NSString *)name;
 + (id)preferenceSpecifierNamed:(NSString *)name target:(id)target set:(SEL)set get:(SEL)get detail:(Class)detail cell:(NSInteger)cell edit:(Class)edit;
 - (void)setProperty:(id)value forKey:(NSString *)key;
+- (id)propertyForKey:(NSString *)key;
 - (NSInteger)cellType;
 @end
 @interface C18NativeListState : NSObject
@@ -19,7 +20,6 @@ extern void MSHookMessageEx(Class,SEL,IMP,IMP *);
 @property(nonatomic,strong) C18NativeSpecifier *group;
 @property(nonatomic,strong) C18NativeSpecifier *toggle;
 @property(nonatomic,strong) NSArray *published;
-@property(nonatomic) NSInteger section;
 @property(nonatomic) BOOL reading;
 @end
 @implementation C18NativeListState @end
@@ -33,13 +33,50 @@ static void C18NativeAdopt(id host);
 static void C18NativeRecoverPage(void);
 static C18NativeListState *C18NativeState(id host) {
     C18NativeListState *state=objc_getAssociatedObject(host,&kNativeState);
-    if(!state){state=[C18NativeListState new];state.control=[C18EnableControl new];state.section=NSNotFound;objc_setAssociatedObject(host,&kNativeState,state,OBJC_ASSOCIATION_RETAIN_NONATOMIC);}
+    if(!state){state=[C18NativeListState new];state.control=[C18EnableControl new];objc_setAssociatedObject(host,&kNativeState,state,OBJC_ASSOCIATION_RETAIN_NONATOMIC);}
     return state;
 }
 static IMP C18NativeOriginal(SEL selector){return class_getMethodImplementation(gHostClass,selector);}
+static BOOL C18NativePathValid(NSIndexPath *path) {
+    return [path isKindOfClass:NSIndexPath.class] && path.length==2 && path.section>=0 && path.row>=0;
+}
+static id C18NativeLiveSpecifier(id host,NSIndexPath *path) {
+    if(!C18NativePathValid(path))return nil;
+    SEL lookup=sel_registerName("specifierAtIndexPath:");
+    // Preferences owns the section/row map. Never reconstruct it by counting
+    // group cells: CCSupport and the original bridge can change that map.
+    IMP base=class_getMethodImplementation(gPSListClass,lookup);
+    return ((id(*)(id,SEL,id))base)(host,lookup,path);
+}
 static BOOL C18NativeOwnedSection(id host,NSIndexPath *path) {
     C18NativeListState *state=objc_getAssociatedObject(host,&kNativeState);
-    return [path isKindOfClass:NSIndexPath.class] && state && state.section!=NSNotFound && path.section==state.section;
+    id spec=C18NativeLiveSpecifier(host,path);
+    return state && spec && (spec==state.toggle || spec==state.group);
+}
+static BOOL C18NativeModuleRow(id host,NSIndexPath *path) {
+    C18NativeSpecifier *spec=C18NativeLiveSpecifier(host,path);
+    if(!spec)return NO;
+    C18NativeListState *state=objc_getAssociatedObject(host,&kNativeState);
+    if(spec==state.toggle || spec==state.group)return NO;
+    // The device's _specifiersForIdentifiers: uses PSCellClassKey and the
+    // CCUISettingsListCell class. Plain switches/buttons are not module rows,
+    // even when stale _enabledSectionIndex claims their section is enabled.
+    id value=[spec propertyForKey:@"cellClass"];
+    Class cell=Nil;
+    if(object_isClass(value))cell=(Class)value;
+    else if([value isKindOfClass:NSString.class])cell=NSClassFromString(value);
+    Class moduleCell=objc_getClass("CCUISettingsListCell");
+    for(Class cls=cell;cls;cls=class_getSuperclass(cls))if(cls==moduleCell)return YES;
+    return NO;
+}
+static id C18NativeSafeIdentifier(id host,NSIndexPath *path) {
+    if(!C18NativeModuleRow(host,path))return nil;
+    SEL lookup=sel_registerName("_identifiersInSection:");
+    id value=((id(*)(id,SEL,NSInteger))objc_msgSend)(host,lookup,path.section);
+    if(![value isKindOfClass:NSArray.class])return nil;
+    NSArray *identifiers=[value copy];
+    if((NSUInteger)path.row>=identifiers.count)return nil;
+    return identifiers[(NSUInteger)path.row];
 }
 static NSInteger C18NativeCellType(id specifier) {
     Method m=class_getInstanceMethod(object_getClass(specifier),@selector(cellType));
@@ -74,14 +111,6 @@ static id C18NativeSpecifiers(id host,SEL command) {
         BOOL hasToggle=[result indexOfObjectIdenticalTo:state.toggle]!=NSNotFound;
         if(hasGroup!=hasToggle){[result removeObjectIdenticalTo:state.group];[result removeObjectIdenticalTo:state.toggle];hasGroup=hasToggle=NO;}
         if(!hasGroup){[result addObject:state.group];[result addObject:state.toggle];}
-        NSInteger section=-1;state.section=NSNotFound;
-        for(id row in result){
-            NSInteger type=C18NativeCellType(row);
-            if(type==NSNotFound)return original;
-            if(type==0)section++;
-            if(row==state.group){state.section=section;break;}
-        }
-        if(state.section<0 || state.section==NSNotFound){state.section=NSNotFound;return original;}
         Ivar ivar=class_getInstanceVariable(gHostClass,"_specifiers");
         // Preserve the original mutable array and its native bridge cache marker.
         // Strong state ownership also covers hosts returning an immutable array.
@@ -91,29 +120,34 @@ static id C18NativeSpecifiers(id host,SEL command) {
     } @finally {state.reading=NO;}
 }
 static id C18NativeCell(id host,SEL cmd,UITableView *table,NSIndexPath *path) {
-    if(C18NativeOwnedSection(host,path)){
-        // Dispatch this genuine PSSwitchCell through Preferences, not the
-        // CC module-cell/CCSupport chain that indexes enabled module arrays.
+    if(!C18NativeSafeIdentifier(host,path)){
+        // CCSupport indexes modules unconditionally after its original cell
+        // call. Bypass that chain for ALL native rows, not just our switch.
         IMP base=class_getMethodImplementation(gPSListClass,cmd);
         return ((id(*)(id,SEL,id,id))base)(host,cmd,table,path);
     }
     return ((id(*)(id,SEL,id,id))C18NativeOriginal(cmd))(host,cmd,table,path);
 }
 static BOOL C18NativeModuleSection(id host,SEL cmd,NSIndexPath *path) {
-    if(C18NativeOwnedSection(host,path))return NO;
+    if(!C18NativeSafeIdentifier(host,path))return NO;
     return ((BOOL(*)(id,SEL,id))C18NativeOriginal(cmd))(host,cmd,path);
 }
 static BOOL C18NativeTableBool(id host,SEL cmd,id table,NSIndexPath *path) {
     if(C18NativeOwnedSection(host,path))return NO;
-    return ((BOOL(*)(id,SEL,id,id))C18NativeOriginal(cmd))(host,cmd,table,path);
+    if(C18NativeSafeIdentifier(host,path))
+        return ((BOOL(*)(id,SEL,id,id))C18NativeOriginal(cmd))(host,cmd,table,path);
+    Method base=class_getInstanceMethod(gPSListClass,cmd);
+    if(base)return ((BOOL(*)(id,SEL,id,id))method_getImplementation(base))(host,cmd,table,path);
+    return sel_isEqual(cmd,sel_registerName("tableView:shouldHighlightRowAtIndexPath:"));
 }
 static NSInteger C18NativeEditingStyle(id host,SEL cmd,id table,NSIndexPath *path) {
-    if(C18NativeOwnedSection(host,path))return UITableViewCellEditingStyleNone;
+    if(!C18NativeSafeIdentifier(host,path))return UITableViewCellEditingStyleNone;
     return ((NSInteger(*)(id,SEL,id,id))C18NativeOriginal(cmd))(host,cmd,table,path);
 }
 static id C18NativeIdentifier(id host,SEL cmd,NSIndexPath *path) {
-    if(C18NativeOwnedSection(host,path))return nil;
-    return ((id(*)(id,SEL,id))C18NativeOriginal(cmd))(host,cmd,path);
+    (void)cmd;
+    // Never invoke the device's unchecked objectAtIndex: implementation.
+    return C18NativeSafeIdentifier(host,path);
 }
 static void C18NativeSelection(id host,SEL cmd,id table,NSIndexPath *path) {
     if(C18NativeOwnedSection(host,path)){[table deselectRowAtIndexPath:path animated:YES];return;}
@@ -182,7 +216,11 @@ static void C18NativeInstall(void) {
     Ivar items=class_getInstanceVariable(host,"_specifiers");
     if(!items || !C18HookTypeMatches(ivar_getTypeEncoding(items),"@"))return;
     SEL cell=sel_registerName("tableView:cellForRowAtIndexPath:");
-    if(!C18HookCanInstall(base,cell,"@",@[@"@",@"@"]))return;
+    if(!C18HookCanInstall(base,cell,"@",@[@"@",@"@"]) ||
+       !C18HookCanInstall(base,sel_registerName("specifierAtIndexPath:"),"@",@[@"@"]) ||
+       !C18HookCanInstall(spec,sel_registerName("propertyForKey:"),"@",@[@"@"]) ||
+       !C18HookCanInstall(host,sel_registerName("_identifiersInSection:"),"@",@[@"q"]) ||
+       !objc_getClass("CCUISettingsListCell"))return;
     gHostClass=host;gSpecifierClass=spec;gPSListClass=base;
     if(!C18NativeFactoryValid()||!C18HookSignatureMatches(class_getClassMethod(spec,@selector(groupSpecifierWithName:)),"@",@[@"@"])||!C18HookCanInstall(spec,@selector(setProperty:forKey:),"v",@[@"@",@"@"]))return;
     BOOL expected=NO;if(!atomic_compare_exchange_strong(&gInstalled,&expected,true))return;

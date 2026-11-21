@@ -1,7 +1,7 @@
 {
   "version": "1.0",
   "repository": "Ning9527Repo/CC18SevenModules",
-  "based_on_own_commit": "e0b8e266351a8c08d3ba76542d6c90542e78b31d",
+  "based_on_own_commit": "8614c1eb0c761290c02df197598b296576df40f1",
   "original_repository_unchanged_commit": "7f06b36409d4145457947f25f1d4f473a636bb2e",
   "retained_third_party_modules": 8,
   "removed_third_party_modules": 22,
@@ -45,7 +45,7 @@
     "C18UptimeFix.m": "149e007139f892385250f6b5ddd6cc4617a746b89782086c9e1184b7c25f5bf3",
     "CCSIMModule.m": "0e35f44c74bce9b1802105c2ea0f593fb303b14571e5884b3eb43803a5d6604d",
     "POWER-FIX.md": "c9b2f82af2a9b09c71916bf31ea4c1394b60b2aad18562ae819ea15cb0d4f514",
-    "README.md": "555a9dc4fef9051acf01df69bf9e4e279a7dcdd35c99933f34cf0ebec59bc78c",
+    "README.md": "5ecfeb24b06f3506e38e7334909301f809014872ca4229c3df49a1e63cd53cc7",
     "Resources/C18DataSwitchGlyph.b64": "c112c7fe9306f3dac626ba22663ec6530ffbd958bbf90de4c7602ce38271c078",
     "Resources/C18DataSwitchGlyph.png": "34c2b0e4a79fa6a1b1b53f0c7e534519c4ad80bbd4c689ac58e88423fbaa6440",
     "Resources/C18PowerHelper.entitlements": "7b2cac0d475041f61be9859c8fbbf7163f5365d92df3f6f7ddba557ed41e266e",
@@ -62,7 +62,7 @@
     "Settings/C18EnableControl.h": "270c49c50b41f8a7ca7023d1a5db610e85b590058efeb5b1c3dfc64a5e0903ce",
     "Settings/C18EnableControl.m": "a3e4217a093878690160619d48f4ecee85f53a6a5ca68fe322762b049c43e27e",
     "Settings/C18FourSettings.plist": "d2cdbe5bb992358f38ee58a518e855c8a8fc29efe71ea94ada7d8fe042023dfc",
-    "Settings/C18SettingsBridge.m": "df6d9ea0bf5f4e2f106378ba0242c1cc88a452d01b170e8d17310e5aa3e44200",
+    "Settings/C18SettingsBridge.m": "f62f62b2ac774030714aeb2570c41c730538aa0ee0defcaaa1f60d1c2e86c46c",
     "Tweak.m": "4ce0ab0bf9ecdc86fe31ee0ea31787eb5a8d1f40d2463dad3c598b1946ce02f7",
     "Vendor/baseline-arm64.deb": "7968755fa82cc144c15c7b26253a44080439f24c37b9ae2eee1767b0443f6504",
     "Vendor/baseline-arm64e.deb": "200611c76e39a25f8a5c925e9f7161f1af02c507411966b1563d8aa4e8861b7f",
@@ -72,12 +72,12 @@
     "tools/package.py": "e3ac6f57bb0006b04dfd2063609e5700e6b1dd1310cc2023c6b73bc495b5f237",
     "tools/prepare_core.py": "b872886aabc5566cc335fc8a206e7d36c45451c72bb9e46c51f0185475dd9bbe",
     "tools/retained_modules.py": "c9eec1acf1fc90e8af23f23ffd7178180f2b9d49d81861920b6b10bdc4ef95b5",
-    "tools/test_enable_lifecycle.py": "bedf62998e5c8ce75523549e204d1e777edccaf5238fcf8cc99b033e8eccdd3a",
+    "tools/test_enable_lifecycle.py": "37a317e69f6e3fc7a84fc5a52cbe42580623f10f68194a0cb6cea8697e4edccb",
     "tools/test_module_migration.py": "cd1d4266180638a1d0164c2d1155f1a15fe8829728fc539285de81eeef478d21",
     "tools/test_power_paths.py": "65c10ff7ae5ef6fb4214ae8bfc93a004443d6ccd96ea8ffcc35548d05f0cb67d",
     "tools/test_power_root.py": "c5c25c609ac81503066138237ca5f1b4c3d51dd5f565f7da6ac484be8fab2233",
-    "tools/test_settings.py": "5f08b6d7edaa2688527e7072afb6319a54fcd5b5d3d3c2fbe64dd9c50ce3b2d9",
+    "tools/test_settings.py": "761ac3fb69fb556b25be5dd54281af76efe6f6dd38e6141186480bc5d9af9aed",
     "tools/verify_delivery.py": "42fcc7cd8b51d77fc2ec0823add91c6aafdec71d94c8b512d8a4eb288d049ebd"
   },
-  "source_change": "Standard enable switch in original PSListController specifier list; own-section module-index isolation; no footer or self-drawn cells; runtime validation pending"
+  "source_change": "Fix live Preferences specifier routing for all non-module rows; remove cached section inference; safe identifier array bounds; actual UIKit runtime unverified"
 }

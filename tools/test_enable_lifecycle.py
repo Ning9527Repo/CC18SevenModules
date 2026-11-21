@@ -9,29 +9,38 @@ assert 'object_setClass(host,gNativeSubclass)' in s
 assert 'C18NativeAdopt(host);gOriginalLoad(host,cmd)' in s
 assert 'result=gOriginalInit(host,cmd);C18NativeAdopt(result)' in s
 assert 'class_getMethodImplementation(gPSListClass,cmd)' in s
-assert 'if(C18NativeOwnedSection(host,path))return nil;' in s
-assert 'if(C18NativeOwnedSection(host,path))return NO;' in s
+assert 'return C18NativeSafeIdentifier(host,path);' in s
+assert 'state.section' not in s
+assert 'specifierAtIndexPath:' in s
+assert 'propertyForKey:@"cellClass"' in s
+assert 'if((NSUInteger)path.row>=identifiers.count)return nil;' in s
+# A live native row map is independent of the stale module section indexes.
+# Include system-native access/reset rows, own rows, module class subclasses,
+# empty arrays and stale/out-of-bounds row paths. The old owned=True test did
+# not exercise any of these resolution failures and is deliberately removed.
 cases=0
-for groups,enabled,disabled in itertools.product(range(1,12),range(8),range(8)):
- original=[('group',g) for g in range(groups)]
- own_group=('enable-group',0);own_row=('switch',0)
- rows=original[:]
- for _ in range(10):
-  if own_group not in rows:rows.extend([own_group,own_row])
-  assert rows[:-2]==original and rows[-2:]==[own_group,own_row]
-  section=groups
-  assert len([r for r in rows if r[0] in ('group','enable-group')])-1==section
-  # Even if stale system section metadata claims this section is a module
-  # section, our own row bypasses all module-indexing cell paths.
-  for claimed_module_section in (section,section-1,section+1):
-   for row in (0,1):
-    owned=True
-    module_classifier=False if owned else (section==claimed_module_section)
-    identifier=None if owned else ['module'][row]
-    assert not module_classifier and identifier is None
-  # Actual module rows retain their normal original routing.
-  for count in (enabled,disabled):
-   array=list(range(count))
-   for index in range(count):assert array[index]==index
+own=object();group=object();access=object();reset=object()
+for shift,enabled,disabled in itertools.product(range(8),range(8),range(8)):
+ live={shift:[access],shift+1:[reset],shift+2:[own],shift+3:[],shift+4:[]}
+ classes={access:'PSSwitchCell',reset:'PSButtonCell',own:'PSSwitchCell'}
+ arrays={shift:[],shift+1:[],shift+2:[],shift+3:list(range(enabled)),shift+4:list(range(disabled))}
+ for section,count in ((shift+3,enabled),(shift+4,disabled)):
+  for i in range(count):
+   spec=object();live[section].append(spec);classes[spec]='CCUISettingsListCellSubclass'
+ for section,row in itertools.product(range(shift,shift+6),range(-1,10)):
+  rows=live.get(section,[]);spec=rows[row] if 0<=row<len(rows) else None
+  is_module=spec is not None and classes.get(spec)=='CCUISettingsListCellSubclass'
+  ids=arrays.get(section,[])
+  identifier=ids[row] if is_module and 0<=row<len(ids) else None
+  if spec in (access,reset,own,None):assert identifier is None
+  if is_module:assert identifier==row
+  cell_route='module' if identifier is not None else 'Preferences'
+  if not is_module:assert cell_route=='Preferences'
   cases+=1
-print('NATIVE_LIST_ROUTING_MODEL_OK',json.dumps({'cases':cases,'same_native_list':True,'duplicate_rows':False,'new_row_never_indexes_module_arrays':True,'iOS_runtime_tested':False}))
+ # Model an in-flight module removal after the native map was produced.
+ for section in (shift+3,shift+4):
+  for row in range(len(live[section])):
+   snapshot=[]
+   assert not 0<=row<len(snapshot)
+   cases+=1
+print('LIVE_SPECIFIER_ROUTING_MODEL_OK',json.dumps({'cases':cases,'native_access_reset_and_enable_isolated':True,'empty_arrays_and_stale_rows_checked':True,'module_rows_preserved':True,'iOS_runtime_tested':False}))

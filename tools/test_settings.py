@@ -28,6 +28,12 @@ def main():
  callback=bridge.split('static void C18NativeImageAdded(',1)[1].split('__attribute__',1)[0]
  assert 'C18NativeInstall();' in callback and 'dispatch_async' not in callback
  assert 'state.published=result' in bridge and 'object_setIvar(host,ivar,result)' in bridge
+ assert 'state.section' not in bridge
+ for token in ('specifierAtIndexPath:', 'CCUISettingsListCell', 'propertyForKey:@"cellClass"', 'C18NativeSafeIdentifier', 'identifiers.count'):
+  assert token in bridge,token
+ identifier=bridge.split('static id C18NativeIdentifier(',1)[1].split('static void C18NativeSelection(',1)[0]
+ assert 'C18NativeOriginal' not in identifier
+ assert 'return C18NativeSafeIdentifier(host,path);' in identifier
  for token in ('savePreset','importPreset','showLogs','UIDocumentPicker','C18LogListController','C18LogDetailController','UIActivityViewController','setButtonAction','C18FourButton'):
   assert token not in bridge+control,token
  for old in ('C18SettingsActions.h','C18SettingsActions.m'):
