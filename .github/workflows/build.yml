@@ -18,6 +18,7 @@ jobs:
         run: |
           python3 tools/test_settings.py
           python3 tools/test_enable_lifecycle.py
+          python3 tools/test_native_install.py
       - name: Check four-action backend and obsolete UI deletion
         run: python3 tools/test_power_root.py
       - name: Compile and sign companion

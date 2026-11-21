@@ -72,7 +72,7 @@ static BOOL C18NativeModuleRow(id host,NSIndexPath *path) {
 static id C18NativeSafeIdentifier(id host,NSIndexPath *path) {
     if(!C18NativeModuleRow(host,path))return nil;
     SEL lookup=sel_registerName("_identifiersInSection:");
-    id value=((id(*)(id,SEL,NSInteger))objc_msgSend)(host,lookup,path.section);
+    id value=((id(*)(id,SEL,NSUInteger))objc_msgSend)(host,lookup,(NSUInteger)path.section);
     if(![value isKindOfClass:NSArray.class])return nil;
     NSArray *identifiers=[value copy];
     if((NSUInteger)path.row>=identifiers.count)return nil;
@@ -219,7 +219,8 @@ static void C18NativeInstall(void) {
     if(!C18HookCanInstall(base,cell,"@",@[@"@",@"@"]) ||
        !C18HookCanInstall(base,sel_registerName("specifierAtIndexPath:"),"@",@[@"@"]) ||
        !C18HookCanInstall(spec,sel_registerName("propertyForKey:"),"@",@[@"@"]) ||
-       !C18HookCanInstall(host,sel_registerName("_identifiersInSection:"),"@",@[@"q"]) ||
+       // Device ControlCenterSettings: @24@0:8Q16 (NSUInteger), not q.
+       !C18HookCanInstall(host,sel_registerName("_identifiersInSection:"),"@",@[@"Q"]) ||
        !objc_getClass("CCUISettingsListCell"))return;
     gHostClass=host;gSpecifierClass=spec;gPSListClass=base;
     if(!C18NativeFactoryValid()||!C18HookSignatureMatches(class_getClassMethod(spec,@selector(groupSpecifierWithName:)),"@",@[@"@"])||!C18HookCanInstall(spec,@selector(setProperty:forKey:),"v",@[@"@",@"@"]))return;

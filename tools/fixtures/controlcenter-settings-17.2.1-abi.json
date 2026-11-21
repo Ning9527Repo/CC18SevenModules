@@ -1,0 +1,195 @@
+{
+  "source": "read-only device ControlCenterSettings Mach-O ObjC method list",
+  "os": "iOS 17.2.1 (21C66)",
+  "image_uuid": "00875eb2-276b-3859-969c-7945cae31170",
+  "sha256": "e9988e1572e465c006a5abbdfbd267780652bcac14a5927803d5a51ab37ab38d",
+  "class": "CCUISettingsListController",
+  "methods": [
+    {
+      "selector": "init",
+      "encoding": "@16@0:8",
+      "imp_offset": "0x2488"
+    },
+    {
+      "selector": "dealloc",
+      "encoding": "v16@0:8",
+      "imp_offset": "0x2620"
+    },
+    {
+      "selector": "viewDidLoad",
+      "encoding": "v16@0:8",
+      "imp_offset": "0x2694"
+    },
+    {
+      "selector": "specifiers",
+      "encoding": "@16@0:8",
+      "imp_offset": "0x26f4"
+    },
+    {
+      "selector": "_updateSwipeInstructionsSpecifier:",
+      "encoding": "v24@0:8@16",
+      "imp_offset": "0x2a54"
+    },
+    {
+      "selector": "profileNotification:",
+      "encoding": "v24@0:8@16",
+      "imp_offset": "0x2b74"
+    },
+    {
+      "selector": "allowedWithinApps:",
+      "encoding": "@24@0:8@16",
+      "imp_offset": "0x2bfc"
+    },
+    {
+      "selector": "setAllowedWithinApps:specifier:",
+      "encoding": "v32@0:8@16@24",
+      "imp_offset": "0x2c64"
+    },
+    {
+      "selector": "showHomeControls:",
+      "encoding": "@24@0:8@16",
+      "imp_offset": "0x2ce4"
+    },
+    {
+      "selector": "setShowHomeControls:specifier:",
+      "encoding": "v32@0:8@16@24",
+      "imp_offset": "0x2d58"
+    },
+    {
+      "selector": "tableView:cellForRowAtIndexPath:",
+      "encoding": "@32@0:8@16@24",
+      "imp_offset": "0x2e68"
+    },
+    {
+      "selector": "tableView:canMoveRowAtIndexPath:",
+      "encoding": "B32@0:8@16@24",
+      "imp_offset": "0x2f3c"
+    },
+    {
+      "selector": "tableView:canEditRowAtIndexPath:",
+      "encoding": "B32@0:8@16@24",
+      "imp_offset": "0x2f44"
+    },
+    {
+      "selector": "tableView:moveRowAtIndexPath:toIndexPath:",
+      "encoding": "v40@0:8@16@24@32",
+      "imp_offset": "0x2f4c"
+    },
+    {
+      "selector": "tableView:shouldHighlightRowAtIndexPath:",
+      "encoding": "B32@0:8@16@24",
+      "imp_offset": "0x3044"
+    },
+    {
+      "selector": "tableView:commitEditingStyle:forRowAtIndexPath:",
+      "encoding": "v40@0:8@16q24@32",
+      "imp_offset": "0x30d4"
+    },
+    {
+      "selector": "tableView:editingStyleForRowAtIndexPath:",
+      "encoding": "q32@0:8@16@24",
+      "imp_offset": "0x3164"
+    },
+    {
+      "selector": "tableView:targetIndexPathForMoveFromRowAtIndexPath:toProposedIndexPath:",
+      "encoding": "@40@0:8@16@24@32",
+      "imp_offset": "0x31c4"
+    },
+    {
+      "selector": "tableView:shouldIndentWhileEditingRowAtIndexPath:",
+      "encoding": "B32@0:8@16@24",
+      "imp_offset": "0x32d0"
+    },
+    {
+      "selector": "tableView:titleForDeleteConfirmationButtonForRowAtIndexPath:",
+      "encoding": "@32@0:8@16@24",
+      "imp_offset": "0x32d8"
+    },
+    {
+      "selector": "loadableModulesChangedForModuleRepository:",
+      "encoding": "v24@0:8@16",
+      "imp_offset": "0x3350"
+    },
+    {
+      "selector": "orderedEnabledModuleIdentifiersChangedForSettingsProvider:",
+      "encoding": "v24@0:8@16",
+      "imp_offset": "0x3400"
+    },
+    {
+      "selector": "_isEnabledModulesSectionAtIndexPath:",
+      "encoding": "B24@0:8@16",
+      "imp_offset": "0x34b0"
+    },
+    {
+      "selector": "_isDisabledModulesSectionAtIndexPath:",
+      "encoding": "B24@0:8@16",
+      "imp_offset": "0x34ec"
+    },
+    {
+      "selector": "_isModulesSectionAtIndexPath:",
+      "encoding": "B24@0:8@16",
+      "imp_offset": "0x3528"
+    },
+    {
+      "selector": "_identifiersInSection:",
+      "encoding": "@24@0:8Q16",
+      "imp_offset": "0x3580"
+    },
+    {
+      "selector": "_descriptionAtIndexPath:",
+      "encoding": "@24@0:8@16",
+      "imp_offset": "0x35f4"
+    },
+    {
+      "selector": "_descriptionForIdentifier:",
+      "encoding": "@24@0:8@16",
+      "imp_offset": "0x364c"
+    },
+    {
+      "selector": "_identifierAtIndexPath:",
+      "encoding": "@24@0:8@16",
+      "imp_offset": "0x365c"
+    },
+    {
+      "selector": "_indexForInsertingItemWithIdentifier:intoArray:",
+      "encoding": "Q32@0:8@16@24",
+      "imp_offset": "0x36e0"
+    },
+    {
+      "selector": "_enableIdentifierAtIndexPath:",
+      "encoding": "v24@0:8@16",
+      "imp_offset": "0x3860"
+    },
+    {
+      "selector": "_disableIdentifierAtIndexPath:",
+      "encoding": "v24@0:8@16",
+      "imp_offset": "0x39a0"
+    },
+    {
+      "selector": "_specifiersForIdentifiers:",
+      "encoding": "@24@0:8@16",
+      "imp_offset": "0x3bb4"
+    },
+    {
+      "selector": "_repopulateModuleData",
+      "encoding": "v16@0:8",
+      "imp_offset": "0x3d6c"
+    },
+    {
+      "selector": "_iconImageForBundle:withDescriptor:compatibleWithTraitCollection:withIconBackgroundColor:",
+      "encoding": "@48@0:8@16@24@32o^@40",
+      "imp_offset": "0x42d8"
+    },
+    {
+      "selector": "_saveState",
+      "encoding": "v16@0:8",
+      "imp_offset": "0x45a0"
+    },
+    {
+      "selector": ".cxx_destruct",
+      "encoding": "v16@0:8",
+      "imp_offset": "0x4648"
+    }
+  ],
+  "runtime_invocation_verified": false
+}

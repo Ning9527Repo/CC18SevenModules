@@ -60,4 +60,6 @@ python3 tools/test_power_root.py
 
 本版完全删除旧PSSpecifier设置页、预设／日志和旧入口代码。启用开关直接接入`CCUISettingsListController`原始specifier列表：创建一个标准开关specifier和所属标准分组，发布回同一个`_specifiers`数组；不使用footer，不自绘行，不修改系统table dataSource/delegate或模块数组。新行通过独立动态控制器类隔离。2026-11-21 23:03两份真机崩溃显示旧section门控仍落入CCSupport无条件模块索引链；本次删除手工计数group／缓存section的识别，改用Preferences基类的`specifierAtIndexPath:`解析实际行，以`cellClass`是否属于真实`CCUISettingsListCell`识别模块。所有非模块原生行（不只是新增开关）直接由Preferences生成单元格；模块仅在对应标识数组实际有该行时走原CCSupport链。`_identifierAtIndexPath:`改为数组类型及非负行号／count校验后的安全读取，不再调用系统未检查的objectAtIndex实现。原生App内访问和还原的specifier、动作、读写目标不变。初始化和当前已显示页面均覆盖。
 
-这是针对已确认越界路径的结构修正，不等同于已完成真机验证。双架构语法、Objective-C路由模型、物理删除与终包签名校验不能替代安装后的开关显示／运行态验证。构建时原库文件名`C18FourSettings`仅为同包替换兼容保留，内容只含一个原列表开关，旧四项类和行为不会打包。
+用户23:49截图仍无开关。进一步直接解析本机`ControlCenterSettings`的ObjC方法表：`_identifiersInSection:`在0x3580，真实编码为`@24@0:8Q16`，参数是`NSUInteger`；上一版却要求`q`，严格ABI门控必然提前返回，连原列表子类／init hook都未安装。本次只修正此处为`Q`及对应`NSUInteger`调用，并加入本机方法编码fixture、覆盖安装门控的CI回归，避免只测已安装后的行路由。原列表开关／空数组保护、八模块及删除范围保持不变。
+
+这是针对已确认启动阻断与越界路径的结构修正，不等同于已完成真机验证。双架构语法、Objective-C路由模型、物理删除与终包签名校验不能替代安装后的开关显示／运行态验证。构建时原库文件名`C18FourSettings`仅为同包替换兼容保留，内容只含一个原列表开关，旧四项类和行为不会打包。
