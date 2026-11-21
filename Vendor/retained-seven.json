@@ -1,0 +1,694 @@
+[
+  {
+    "arch": "arm64",
+    "prefix": "var/jb/",
+    "original_sha256": "5f2f16b17281d0d3cbf9eb2bd096a7021e176261023c21d9d8f892f9a3141cfb",
+    "sanitized_sha256": "88d989cd8f877e4413c2797395d7537a73dc0b7649896e9b1bb18ef659db0863",
+    "kept_modules": [
+      {
+        "bundle": "CCBadgeClear.bundle",
+        "identifier": "netskao.ccbadgeclear"
+      },
+      {
+        "bundle": "CCCellularRateModule.bundle",
+        "identifier": "netskao.cccellularratemodule"
+      },
+      {
+        "bundle": "CCSIM.bundle",
+        "identifier": "netskao.ccsim"
+      },
+      {
+        "bundle": "CCSwitchDataModule.bundle",
+        "identifier": "netskao.ccswitchdatamodule"
+      },
+      {
+        "bundle": "CCVPN.bundle",
+        "identifier": "com.skypain.ccvpn"
+      },
+      {
+        "bundle": "UptimeModule.bundle",
+        "identifier": "com.mtac.uptimemodule"
+      },
+      {
+        "bundle": "cpuMagicCCBundle.bundle",
+        "identifier": "com.sop.cpumagicrootless"
+      }
+    ],
+    "removed_modules": [
+      {
+        "bundle": "AlipayScan.bundle",
+        "identifier": "netskao.alipayscan"
+      },
+      {
+        "bundle": "CAPerfHUDModule.bundle",
+        "identifier": "com.kdt.caperfhudcc"
+      },
+      {
+        "bundle": "CCAutoBrightness.bundle",
+        "identifier": "com.skypain.ccautobrightness"
+      },
+      {
+        "bundle": "CCLiftToWake.bundle",
+        "identifier": "com.netskao.cclifttowake"
+      },
+      {
+        "bundle": "CCLocation.bundle",
+        "identifier": "com.skypain.cclocation"
+      },
+      {
+        "bundle": "CCLockScreen.bundle",
+        "identifier": "com.skypain.cclockscreen"
+      },
+      {
+        "bundle": "CCRespring.bundle",
+        "identifier": "com.skypain.ccrespring"
+      },
+      {
+        "bundle": "CCScreenShot.bundle",
+        "identifier": "com.skypain.ccscreenshot"
+      },
+      {
+        "bundle": "CCSettrings.bundle",
+        "identifier": "com.skypain.ccsettrings"
+      },
+      {
+        "bundle": "CCVibration.bundle",
+        "identifier": "com.KingPuffaddi.control-center.CCVibration"
+      },
+      {
+        "bundle": "FilzaModule.bundle",
+        "identifier": "com.jailbreak365.control-center.FilzaModule"
+      },
+      {
+        "bundle": "MuteModule.bundle",
+        "identifier": "com.jailbreak365.control-center.MuteModuleCC"
+      },
+      {
+        "bundle": "QuantumultXLauncher.bundle",
+        "identifier": "netskao.quantumultxlauncher"
+      },
+      {
+        "bundle": "SafariModule.bundle",
+        "identifier": "com.jailbreak365.control-center.SafariModule"
+      },
+      {
+        "bundle": "SileoModule.bundle",
+        "identifier": "com.jailbreak365.control-center.SileoModule"
+      },
+      {
+        "bundle": "TelegramModule.bundle",
+        "identifier": "com.jailbreak365.control-center.TelegramModule"
+      },
+      {
+        "bundle": "TinyDisplayModule.bundle",
+        "identifier": "netskao.tinydisplaymodule"
+      },
+      {
+        "bundle": "TinyMediaAudioModule.bundle",
+        "identifier": "netskao.tinymediaaudiomodule"
+      },
+      {
+        "bundle": "TwitterModule.bundle",
+        "identifier": "com.jailbreak365.control-center.TwitterModule"
+      },
+      {
+        "bundle": "WeChatScan.bundle",
+        "identifier": "netskao.wechatscan"
+      },
+      {
+        "bundle": "YouTubeModule.bundle",
+        "identifier": "com.jailbreak365.control-center.YouTubeModule"
+      },
+      {
+        "bundle": "qswx.bundle",
+        "identifier": "com.zqbb.qswx"
+      },
+      {
+        "bundle": "qszfb.bundle",
+        "identifier": "com.zqbb.qszfb"
+      }
+    ],
+    "removed_paths": [
+      "var/jb/Library/ControlCenter/Bundles/AlipayScan.bundle",
+      "var/jb/Library/ControlCenter/Bundles/AlipayScan.bundle/AlipayScan",
+      "var/jb/Library/ControlCenter/Bundles/AlipayScan.bundle/Icon@2x.png",
+      "var/jb/Library/ControlCenter/Bundles/AlipayScan.bundle/Info.plist",
+      "var/jb/Library/ControlCenter/Bundles/AlipayScan.bundle/SettingsIcon@2x.png",
+      "var/jb/Library/ControlCenter/Bundles/CAPerfHUDModule.bundle",
+      "var/jb/Library/ControlCenter/Bundles/CAPerfHUDModule.bundle/AppIcon@1x.png",
+      "var/jb/Library/ControlCenter/Bundles/CAPerfHUDModule.bundle/AppIcon@2x.png",
+      "var/jb/Library/ControlCenter/Bundles/CAPerfHUDModule.bundle/AppIcon@3x.png",
+      "var/jb/Library/ControlCenter/Bundles/CAPerfHUDModule.bundle/CAPerfHUDModule",
+      "var/jb/Library/ControlCenter/Bundles/CAPerfHUDModule.bundle/Info.plist",
+      "var/jb/Library/ControlCenter/Bundles/CAPerfHUDModule.bundle/SettingsIcon.png",
+      "var/jb/Library/ControlCenter/Bundles/CCAutoBrightness.bundle",
+      "var/jb/Library/ControlCenter/Bundles/CCAutoBrightness.bundle/CCAutoBrightness",
+      "var/jb/Library/ControlCenter/Bundles/CCAutoBrightness.bundle/Info.plist",
+      "var/jb/Library/ControlCenter/Bundles/CCAutoBrightness.bundle/SettingsIcon@2x.png",
+      "var/jb/Library/ControlCenter/Bundles/CCAutoBrightness.bundle/icon@3x.png",
+      "var/jb/Library/ControlCenter/Bundles/CCLiftToWake.bundle",
+      "var/jb/Library/ControlCenter/Bundles/CCLiftToWake.bundle/CCLiftToWake",
+      "var/jb/Library/ControlCenter/Bundles/CCLiftToWake.bundle/Info.plist",
+      "var/jb/Library/ControlCenter/Bundles/CCLiftToWake.bundle/SettingsIcon@3x.png",
+      "var/jb/Library/ControlCenter/Bundles/CCLocation.bundle",
+      "var/jb/Library/ControlCenter/Bundles/CCLocation.bundle/CCLocation",
+      "var/jb/Library/ControlCenter/Bundles/CCLocation.bundle/Info.plist",
+      "var/jb/Library/ControlCenter/Bundles/CCLocation.bundle/SettingsIcon@2x.png",
+      "var/jb/Library/ControlCenter/Bundles/CCLocation.bundle/icon@3x.png",
+      "var/jb/Library/ControlCenter/Bundles/CCLockScreen.bundle",
+      "var/jb/Library/ControlCenter/Bundles/CCLockScreen.bundle/CCLockScreen",
+      "var/jb/Library/ControlCenter/Bundles/CCLockScreen.bundle/Info.plist",
+      "var/jb/Library/ControlCenter/Bundles/CCLockScreen.bundle/SettingsIcon@2x.png",
+      "var/jb/Library/ControlCenter/Bundles/CCLockScreen.bundle/icon@3x.png",
+      "var/jb/Library/ControlCenter/Bundles/CCRespring.bundle",
+      "var/jb/Library/ControlCenter/Bundles/CCRespring.bundle/CCRespring",
+      "var/jb/Library/ControlCenter/Bundles/CCRespring.bundle/Info.plist",
+      "var/jb/Library/ControlCenter/Bundles/CCRespring.bundle/SettingsIcon@2x.png",
+      "var/jb/Library/ControlCenter/Bundles/CCRespring.bundle/en.lproj",
+      "var/jb/Library/ControlCenter/Bundles/CCRespring.bundle/en.lproj/Localizable.strings",
+      "var/jb/Library/ControlCenter/Bundles/CCRespring.bundle/icon@3x.png",
+      "var/jb/Library/ControlCenter/Bundles/CCRespring.bundle/zh_CN.lproj",
+      "var/jb/Library/ControlCenter/Bundles/CCRespring.bundle/zh_CN.lproj/Localizable.strings",
+      "var/jb/Library/ControlCenter/Bundles/CCScreenShot.bundle",
+      "var/jb/Library/ControlCenter/Bundles/CCScreenShot.bundle/CCScreenShot",
+      "var/jb/Library/ControlCenter/Bundles/CCScreenShot.bundle/Info.plist",
+      "var/jb/Library/ControlCenter/Bundles/CCScreenShot.bundle/SettingsIcon@2x.png",
+      "var/jb/Library/ControlCenter/Bundles/CCScreenShot.bundle/icon@3x.png",
+      "var/jb/Library/ControlCenter/Bundles/CCSettrings.bundle",
+      "var/jb/Library/ControlCenter/Bundles/CCSettrings.bundle/CCSettrings",
+      "var/jb/Library/ControlCenter/Bundles/CCSettrings.bundle/Info.plist",
+      "var/jb/Library/ControlCenter/Bundles/CCSettrings.bundle/SettingsIcon@2x.png",
+      "var/jb/Library/ControlCenter/Bundles/CCSettrings.bundle/icon@3x.png",
+      "var/jb/Library/ControlCenter/Bundles/CCVibration.bundle",
+      "var/jb/Library/ControlCenter/Bundles/CCVibration.bundle/CCVibration",
+      "var/jb/Library/ControlCenter/Bundles/CCVibration.bundle/Icon@2x.png",
+      "var/jb/Library/ControlCenter/Bundles/CCVibration.bundle/Icon@3x.png",
+      "var/jb/Library/ControlCenter/Bundles/CCVibration.bundle/Info.plist",
+      "var/jb/Library/ControlCenter/Bundles/CCVibration.bundle/SettingsIcon@2x.png",
+      "var/jb/Library/ControlCenter/Bundles/CCVibration.bundle/SettingsIcon@3x.png",
+      "var/jb/Library/ControlCenter/Bundles/FilzaModule.bundle",
+      "var/jb/Library/ControlCenter/Bundles/FilzaModule.bundle/Assets.car",
+      "var/jb/Library/ControlCenter/Bundles/FilzaModule.bundle/Info.plist",
+      "var/jb/Library/ControlCenter/Bundles/MuteModule.bundle",
+      "var/jb/Library/ControlCenter/Bundles/MuteModule.bundle/Assets.car",
+      "var/jb/Library/ControlCenter/Bundles/MuteModule.bundle/Info.plist",
+      "var/jb/Library/ControlCenter/Bundles/MuteModule.bundle/MuteModule",
+      "var/jb/Library/ControlCenter/Bundles/QuantumultXLauncher.bundle",
+      "var/jb/Library/ControlCenter/Bundles/QuantumultXLauncher.bundle/Icon@3x.png",
+      "var/jb/Library/ControlCenter/Bundles/QuantumultXLauncher.bundle/Info.plist",
+      "var/jb/Library/ControlCenter/Bundles/QuantumultXLauncher.bundle/QuantumultXLauncher",
+      "var/jb/Library/ControlCenter/Bundles/QuantumultXLauncher.bundle/SettingsIcon@3x.png",
+      "var/jb/Library/ControlCenter/Bundles/SafariModule.bundle",
+      "var/jb/Library/ControlCenter/Bundles/SafariModule.bundle/Assets.car",
+      "var/jb/Library/ControlCenter/Bundles/SafariModule.bundle/Info.plist",
+      "var/jb/Library/ControlCenter/Bundles/SileoModule.bundle",
+      "var/jb/Library/ControlCenter/Bundles/SileoModule.bundle/Assets.car",
+      "var/jb/Library/ControlCenter/Bundles/SileoModule.bundle/Info.plist",
+      "var/jb/Library/ControlCenter/Bundles/TelegramModule.bundle",
+      "var/jb/Library/ControlCenter/Bundles/TelegramModule.bundle/Assets.car",
+      "var/jb/Library/ControlCenter/Bundles/TelegramModule.bundle/Info.plist",
+      "var/jb/Library/ControlCenter/Bundles/TinyDisplayModule.bundle",
+      "var/jb/Library/ControlCenter/Bundles/TinyDisplayModule.bundle/Info.plist",
+      "var/jb/Library/ControlCenter/Bundles/TinyDisplayModule.bundle/SettingsIcon@3x.png",
+      "var/jb/Library/ControlCenter/Bundles/TinyDisplayModule.bundle/TinyDisplayModule",
+      "var/jb/Library/ControlCenter/Bundles/TinyMediaAudioModule.bundle",
+      "var/jb/Library/ControlCenter/Bundles/TinyMediaAudioModule.bundle/Info.plist",
+      "var/jb/Library/ControlCenter/Bundles/TinyMediaAudioModule.bundle/SettingsIcon@3x.png",
+      "var/jb/Library/ControlCenter/Bundles/TinyMediaAudioModule.bundle/TinyMediaAudioModule",
+      "var/jb/Library/ControlCenter/Bundles/TwitterModule.bundle",
+      "var/jb/Library/ControlCenter/Bundles/TwitterModule.bundle/Assets.car",
+      "var/jb/Library/ControlCenter/Bundles/TwitterModule.bundle/Info.plist",
+      "var/jb/Library/ControlCenter/Bundles/WeChatScan.bundle",
+      "var/jb/Library/ControlCenter/Bundles/WeChatScan.bundle/Icon@2x.png",
+      "var/jb/Library/ControlCenter/Bundles/WeChatScan.bundle/Info.plist",
+      "var/jb/Library/ControlCenter/Bundles/WeChatScan.bundle/SettingsIcon@2x.png",
+      "var/jb/Library/ControlCenter/Bundles/WeChatScan.bundle/WeChatScan",
+      "var/jb/Library/ControlCenter/Bundles/YouTubeModule.bundle",
+      "var/jb/Library/ControlCenter/Bundles/YouTubeModule.bundle/Assets.car",
+      "var/jb/Library/ControlCenter/Bundles/YouTubeModule.bundle/Info.plist",
+      "var/jb/Library/ControlCenter/Bundles/qswx.bundle",
+      "var/jb/Library/ControlCenter/Bundles/qswx.bundle/Info.plist",
+      "var/jb/Library/ControlCenter/Bundles/qswx.bundle/SettingsIcon@2x.png",
+      "var/jb/Library/ControlCenter/Bundles/qswx.bundle/icon@2x.png",
+      "var/jb/Library/ControlCenter/Bundles/qswx.bundle/qswx",
+      "var/jb/Library/ControlCenter/Bundles/qszfb.bundle",
+      "var/jb/Library/ControlCenter/Bundles/qszfb.bundle/Info.plist",
+      "var/jb/Library/ControlCenter/Bundles/qszfb.bundle/SettingsIcon@2x.png",
+      "var/jb/Library/ControlCenter/Bundles/qszfb.bundle/icon@2x.png",
+      "var/jb/Library/ControlCenter/Bundles/qszfb.bundle/qszfb",
+      "var/jb/Library/MobileSubstrate/DynamicLibraries/C18ConnectivityFive.dylib",
+      "var/jb/Library/MobileSubstrate/DynamicLibraries/C18PowerMenu.dylib",
+      "var/jb/Library/MobileSubstrate/DynamicLibraries/C18PowerMenu.plist",
+      "var/jb/usr/bin/CADebugHelper"
+    ],
+    "removed_file_sha256": {
+      "var/jb/Library/ControlCenter/Bundles/SafariModule.bundle/Info.plist": "f43b957f1ea07d9ae7a26c4ff7a5531354170fe43c03ae6eec1178697a92a881",
+      "var/jb/Library/ControlCenter/Bundles/CCLockScreen.bundle/SettingsIcon@2x.png": "450466d883bb8365e3cdd01e6ef7ecb1ba4441a619461a14604b8a36458d8288",
+      "var/jb/Library/ControlCenter/Bundles/CAPerfHUDModule.bundle/CAPerfHUDModule": "afc0a691bedc142baac1ce3ae5245f761c417c6253149009a4640922350e10eb",
+      "var/jb/Library/ControlCenter/Bundles/CCScreenShot.bundle/SettingsIcon@2x.png": "b3626d48698b457693ebeaec46ed43ad6c7679882a6905e808bddb793fd9d330",
+      "var/jb/Library/ControlCenter/Bundles/YouTubeModule.bundle/Info.plist": "8a65f96e2966159837ad270cf07e52a98fe5d6a57a51be47931b085cbc135d8b",
+      "var/jb/Library/ControlCenter/Bundles/CCLockScreen.bundle/CCLockScreen": "b4edc28ed773f84f9d1b002249e0e62a5967dd2b44608014d75c920e640de97a",
+      "var/jb/Library/ControlCenter/Bundles/qszfb.bundle/SettingsIcon@2x.png": "2badfad6ef78f41e4a3fd04026dc016e73e3e5db85f6e1348335239cd5afe8a2",
+      "var/jb/Library/ControlCenter/Bundles/WeChatScan.bundle/Info.plist": "8d3a844d705cfa378aa6a73613ece47659125703a73dc44551b7267e565c524d",
+      "var/jb/Library/ControlCenter/Bundles/FilzaModule.bundle/Assets.car": "f90a712e55f7c544deedcd78786fb411b4025af54fadc5cd9896a401f9c090e7",
+      "var/jb/Library/ControlCenter/Bundles/CCLiftToWake.bundle/SettingsIcon@3x.png": "78ca90dce30d7b24d302d4d1c79f45fcaf3370f8ffe27c02a74606b4442a254c",
+      "var/jb/Library/MobileSubstrate/DynamicLibraries/C18PowerMenu.dylib": "5490c2a7ea6ebe4e4d0c2f568dccae4a609f69d9a9f0d9805e70c2749be6699b",
+      "var/jb/Library/ControlCenter/Bundles/CCLocation.bundle/icon@3x.png": "b0d5cf3d8612675f26aee6ff83ce430667c34f2c2320e39f96243e037628afec",
+      "var/jb/Library/ControlCenter/Bundles/MuteModule.bundle/MuteModule": "c93696037284b7234f9b6d13c87c2cea77b3093f74a3a123b91559400b0db7d2",
+      "var/jb/Library/ControlCenter/Bundles/CCVibration.bundle/CCVibration": "f6823a69f454ce96197b26d078b75759c3cf9612c1cb053951a014eefcb573bf",
+      "var/jb/Library/ControlCenter/Bundles/CCLockScreen.bundle/icon@3x.png": "88f5c8e042fa1f4bf6d6ff019f4fb9b624df25e7b9dffbd8c638973b7d62c1b4",
+      "var/jb/Library/ControlCenter/Bundles/QuantumultXLauncher.bundle/QuantumultXLauncher": "cc25a94f204df731b48385b6ddfadb6d6fe8779ef3b8c52cbdc368068cf2a7f9",
+      "var/jb/Library/ControlCenter/Bundles/qszfb.bundle/qszfb": "7a00641a87d1739e7612a812950c8f76a1ab4dc51f9c3bdfa698f32c636406b6",
+      "var/jb/Library/ControlCenter/Bundles/CCRespring.bundle/en.lproj/Localizable.strings": "77ab9d63152c8a76ab3f3790a09a0034185e3d7b622e87f23aeb98eb15ffb06d",
+      "var/jb/Library/ControlCenter/Bundles/CCVibration.bundle/SettingsIcon@3x.png": "48ad181209521f4a097a3fa0ec6e2025b7d59b444d1cc264ef3971657c2efb7f",
+      "var/jb/Library/ControlCenter/Bundles/CCVibration.bundle/SettingsIcon@2x.png": "cdb2f9c4d072b5f16d6043f6d291ae0219b30b5934bbf3120aaaf091668ff271",
+      "var/jb/Library/ControlCenter/Bundles/qszfb.bundle/icon@2x.png": "689a9e827d3d24077f7becba3bd74fc93c05761510ffe926eb28ac40014b6b82",
+      "var/jb/usr/bin/CADebugHelper": "ce90aea48c5d59151eb31156bcad347128013dbaf96b62e6e1c8b49c3fd8f6bc",
+      "var/jb/Library/ControlCenter/Bundles/TinyMediaAudioModule.bundle/SettingsIcon@3x.png": "0df7d6aa2ef50da7a7d19d9e0bfa5ef9c1ed4f0b3650ed6c6289e5093ea51b44",
+      "var/jb/Library/ControlCenter/Bundles/FilzaModule.bundle/Info.plist": "765acb7fc3f96a03bad4a537c290e93bc293231ded10f5db235ade7a78307280",
+      "var/jb/Library/ControlCenter/Bundles/CCLocation.bundle/SettingsIcon@2x.png": "ba3f9d35299073d88fe7e92f4ed251abb8e5cfe3bda912869b73dba0a101b2ea",
+      "var/jb/Library/ControlCenter/Bundles/CCSettrings.bundle/Info.plist": "2e39623149883052e32ae488574870800b0110d071a4aff35983ede70af0c6d4",
+      "var/jb/Library/ControlCenter/Bundles/CCAutoBrightness.bundle/Info.plist": "d982e119fe610dd69a29eb3af995dd6fb02f43ffa3e405cf94bd9c60ed6145db",
+      "var/jb/Library/ControlCenter/Bundles/CCRespring.bundle/SettingsIcon@2x.png": "7aacbde123386a57bea682c637efdfb0bc767a6bd576aeb9e1eb22354326c322",
+      "var/jb/Library/ControlCenter/Bundles/CCRespring.bundle/zh_CN.lproj/Localizable.strings": "11fa73bc130029c81be121f76684ce77f10852149abd1e4c5473d9358fba7cfc",
+      "var/jb/Library/ControlCenter/Bundles/qswx.bundle/SettingsIcon@2x.png": "5054544d4ed32f8974dff68f1099daf31cc66c111afd404d45fb652eabd4b9d4",
+      "var/jb/Library/ControlCenter/Bundles/qswx.bundle/Info.plist": "47a2de1a22aa27e2226f587e34c39df48cd0c9017f254f3608ef3e52be43aab1",
+      "var/jb/Library/ControlCenter/Bundles/SileoModule.bundle/Info.plist": "107d5f46fbf4dc69be5a0dcf18377593ef736419166d5a6ebae3cdba0a667c7d",
+      "var/jb/Library/ControlCenter/Bundles/TinyDisplayModule.bundle/SettingsIcon@3x.png": "7d21028ebc74992e4bccd55b517922bcf2aa6d3b910476b990ff056b55c56cea",
+      "var/jb/Library/ControlCenter/Bundles/CCLockScreen.bundle/Info.plist": "ff9919780a35fc37debd86a6e55db4b30605d9c404c66f8330a57d8cb451c496",
+      "var/jb/Library/MobileSubstrate/DynamicLibraries/C18ConnectivityFive.dylib": "301552c827465be210a371e0cd38844e6d52f54b41f3cae34bd0f6124fc66df2",
+      "var/jb/Library/ControlCenter/Bundles/SileoModule.bundle/Assets.car": "888b8d3db4c31837b871133f6e56939c905e8c9c10e1f57757f138421b30fe59",
+      "var/jb/Library/ControlCenter/Bundles/TelegramModule.bundle/Assets.car": "e8db7ef6e7f0e02327ed800304ce134ba73d0b39905b079da425e632b70979ed",
+      "var/jb/Library/ControlCenter/Bundles/CCSettrings.bundle/icon@3x.png": "8aba5ec2c1e690e559e823b6345571ce0c21c089b2cef1f3316092485b2c6371",
+      "var/jb/Library/ControlCenter/Bundles/CCAutoBrightness.bundle/CCAutoBrightness": "f170d30c54a4427ecb7dd1555850d5865b695f94429bd8b18aa0a445dedd441b",
+      "var/jb/Library/ControlCenter/Bundles/qswx.bundle/icon@2x.png": "12298c034afb95455d39cb3b768c33fa2a77203303b2f195f5290bdfb4233cb1",
+      "var/jb/Library/ControlCenter/Bundles/QuantumultXLauncher.bundle/SettingsIcon@3x.png": "a0c1dc8526fb71fc11f9fd3814eee2176bf942e625cbe23d75aa9368fadcec65",
+      "var/jb/Library/ControlCenter/Bundles/TinyDisplayModule.bundle/Info.plist": "416322db66753f5f536bfc474e6fc864d5c3239e13c0c942b9bb312eee058fc0",
+      "var/jb/Library/ControlCenter/Bundles/WeChatScan.bundle/Icon@2x.png": "1c79c5de9801b60a6fd1522ad339cec003f94544694c344721f23ca7a8e0b6c2",
+      "var/jb/Library/ControlCenter/Bundles/CCLiftToWake.bundle/CCLiftToWake": "221b4bec14bf24372defcd2721b58fad5ff3c62d517f1e0ca9b41972b15e521a",
+      "var/jb/Library/ControlCenter/Bundles/TinyDisplayModule.bundle/TinyDisplayModule": "a569288a5689cdf6c151631cdc66804a0bd2c8952cb5540b9131b7e629088202",
+      "var/jb/Library/ControlCenter/Bundles/TinyMediaAudioModule.bundle/Info.plist": "819e4504c3462eb54cfae4df7a49db8676f6ae51efbabba3b1822867561fd63e",
+      "var/jb/Library/ControlCenter/Bundles/qszfb.bundle/Info.plist": "6901738921a694f4ec9931315510f1a5eced445f078b562ffc5f932638350402",
+      "var/jb/Library/ControlCenter/Bundles/CAPerfHUDModule.bundle/Info.plist": "6aec166fb7e2fc881a91c6d9736786c68d499ffa9bd22b030b756519d6d091fb",
+      "var/jb/Library/ControlCenter/Bundles/CCSettrings.bundle/SettingsIcon@2x.png": "4b81fab31bc893ddc6fb8f88c53afdb5d8a309f03783c18c8e4d5992a1faf890",
+      "var/jb/Library/ControlCenter/Bundles/CCLocation.bundle/CCLocation": "cacccfb1c48544780992fd4116653c58bee3f1f92e3e737fd9d86649aa889eaa",
+      "var/jb/Library/ControlCenter/Bundles/MuteModule.bundle/Info.plist": "c8d8491fd2728a058a12267450f2b49ce569cdc447310d94d94fb6465cfe6131",
+      "var/jb/Library/ControlCenter/Bundles/CCScreenShot.bundle/icon@3x.png": "c8c7d6e56a45242dd5f4f102c80dadcd10c17a47200c1bcf827ab7c11a272ef9",
+      "var/jb/Library/ControlCenter/Bundles/CCSettrings.bundle/CCSettrings": "cb17235f01ed2cc7f7e39a94b60c72012164be4c62b05afbef01027ccd129569",
+      "var/jb/Library/ControlCenter/Bundles/AlipayScan.bundle/AlipayScan": "e574f6d381f33e24991af8eb49cf317c1a98fd9874fbe8ead5cbadaa846e503d",
+      "var/jb/Library/ControlCenter/Bundles/QuantumultXLauncher.bundle/Info.plist": "3720a0aa3b5e0fc378cafd0755eaef626ad4798f8ce66eaddec9161b536d1ab9",
+      "var/jb/Library/ControlCenter/Bundles/CCRespring.bundle/CCRespring": "bd491441d20c960c6c66fe3dbf5d506d1089d6d2b62d5067b1607b246f4e334f",
+      "var/jb/Library/ControlCenter/Bundles/QuantumultXLauncher.bundle/Icon@3x.png": "f0131cd0f660a16e0b6ca7fb6cb3ba18fafc24f46fd152f1189b90e5e3b653d4",
+      "var/jb/Library/ControlCenter/Bundles/TwitterModule.bundle/Assets.car": "245e6c28b5d2aebf9c36fc8900d372999f4ada25180a6bc11bc0b22d43bfea5a",
+      "var/jb/Library/ControlCenter/Bundles/CAPerfHUDModule.bundle/AppIcon@3x.png": "577d1183952a6f72ec1f5e1248dd2ba5443bf02419d1851327c95873b18c41f4",
+      "var/jb/Library/ControlCenter/Bundles/CCRespring.bundle/Info.plist": "ac52e6933cbe578fda1c492e9aaac9c5da542af7f823976e6f5dab4b6688232a",
+      "var/jb/Library/ControlCenter/Bundles/CCScreenShot.bundle/Info.plist": "63cc65c79a15ffbf052f78c566bb195ec5b224c9902e493b6bb190a4d9ee52f6",
+      "var/jb/Library/ControlCenter/Bundles/MuteModule.bundle/Assets.car": "338dfb5bf08b1ee8ebdaaeec764e6220ffd150aef367323e22c2a7d7e29c16b6",
+      "var/jb/Library/ControlCenter/Bundles/CCVibration.bundle/Icon@3x.png": "423e34692996d311d2183d350ac1e18b16d2d66511857651e034cd96e92c1478",
+      "var/jb/Library/ControlCenter/Bundles/CCAutoBrightness.bundle/icon@3x.png": "6a923a50f584a02300dd750aacf47dfae231f5a5f6809a09284b9f7c4e4351d0",
+      "var/jb/Library/ControlCenter/Bundles/YouTubeModule.bundle/Assets.car": "19a1f9a755569e86456f3607f07d633fec36e5da19b244689986896a6ea05334",
+      "var/jb/Library/ControlCenter/Bundles/TelegramModule.bundle/Info.plist": "b929d85705488ba70e5dca1122f970815059b034d23e545789ca8c610ba81ac9",
+      "var/jb/Library/ControlCenter/Bundles/CCVibration.bundle/Icon@2x.png": "afe9ca855e1a9310b3f60ebb224914909a2dba6fd506ed8f1cdb9cad3e5434a0",
+      "var/jb/Library/ControlCenter/Bundles/CCAutoBrightness.bundle/SettingsIcon@2x.png": "2f20c9bb0254c7212306ad48005427c14893f93abc0d713051b6003f24d95d02",
+      "var/jb/Library/ControlCenter/Bundles/WeChatScan.bundle/WeChatScan": "eec6dae1d915bc0dd4c6b1e688da2857cd74e5200c4f177eb8ce6f152f751d79",
+      "var/jb/Library/ControlCenter/Bundles/CCVibration.bundle/Info.plist": "0db151a2c590e6500d6cc198884b24a6b0694bb6d997d748e3da3e0122dfd96f",
+      "var/jb/Library/ControlCenter/Bundles/TwitterModule.bundle/Info.plist": "0f774bd37beecb0877c3327c6f03206ca73457573423144a298195504b453691",
+      "var/jb/Library/ControlCenter/Bundles/CCScreenShot.bundle/CCScreenShot": "ca7be715709551e38dd7ce1bcfc694410c31662785f0b642472fdce9bbb886a4",
+      "var/jb/Library/ControlCenter/Bundles/WeChatScan.bundle/SettingsIcon@2x.png": "0f9cd8287c2f17d92125a6aa3340474cae3d85acd946a6ca04ca2eb078610b4b",
+      "var/jb/Library/ControlCenter/Bundles/AlipayScan.bundle/Icon@2x.png": "b90c42832f28f3159a16d82e5914ca744dca26b01871f75ae65dcfc3b976c76e",
+      "var/jb/Library/ControlCenter/Bundles/CCRespring.bundle/icon@3x.png": "61301b32fc4a547d5c712d0d46b51ab7595a4ecb21558e88e3ebda83dbbf827b",
+      "var/jb/Library/MobileSubstrate/DynamicLibraries/C18PowerMenu.plist": "29bbe36650150dbedd2f466bb84abefadfb54eb0a5bddd1e6814d40c607618f8",
+      "var/jb/Library/ControlCenter/Bundles/CCLocation.bundle/Info.plist": "ef1c0e1be9f8581de1581e1e601148e61a67e013b051a178ec915f59a4436365",
+      "var/jb/Library/ControlCenter/Bundles/AlipayScan.bundle/Info.plist": "f5f8dc97117b84793064c27e8f29b3397cf14a1dfe087becd43f9d1321c91078",
+      "var/jb/Library/ControlCenter/Bundles/CAPerfHUDModule.bundle/AppIcon@1x.png": "5b27fdf5cb71741b8b18a9ccbfae37254560ed49b47cbace81d19f05adcb6c6e",
+      "var/jb/Library/ControlCenter/Bundles/qswx.bundle/qswx": "20a849004773e94b5b1de5e63e0684f7d3312e967b67f03973b1ca207764748d",
+      "var/jb/Library/ControlCenter/Bundles/SafariModule.bundle/Assets.car": "a3d367b0cc95aef812e7946719bcd35a3d6b1fb5fab599f9d1d574bfd1c22005",
+      "var/jb/Library/ControlCenter/Bundles/CCLiftToWake.bundle/Info.plist": "54a6f7e0249bfd594d9c2a594aee7aec4924d665fea1c3d941459850d8e45c87",
+      "var/jb/Library/ControlCenter/Bundles/CAPerfHUDModule.bundle/AppIcon@2x.png": "67d1ef026457bcee7989a01cd615d804d0b16dab2e937d9813c4b87574f25fd1",
+      "var/jb/Library/ControlCenter/Bundles/TinyMediaAudioModule.bundle/TinyMediaAudioModule": "7e64038c4daf5c7002c6db0bb65b88b64ca72c81fc563666638a35429ee3fe55",
+      "var/jb/Library/ControlCenter/Bundles/AlipayScan.bundle/SettingsIcon@2x.png": "b6bd5056ee9b27e26b57823e539f7621847a188afecd7a537d1b1377256872e3",
+      "var/jb/Library/ControlCenter/Bundles/CAPerfHUDModule.bundle/SettingsIcon.png": "5f5e23bd20e5f25a5c763599e8b858faf25cc03f1dbaf902e11bae1432ad2c7d"
+    },
+    "changed_metadata": [
+      "var/jb/Library/ControlCenter/Bundles/CCSIM.bundle/Info.plist",
+      "var/jb/Library/PreferenceBundles/ControlCenter18Prefs.bundle/Info.plist"
+    ],
+    "unrelated_entries_unchanged": true,
+    "kept_payload_unchanged_except_product_versions": true
+  },
+  {
+    "arch": "arm64e",
+    "prefix": "",
+    "original_sha256": "483130e2bc6ee885845bb66b0b9e183aa66f4f54b6bb1a950c9935f0e473a7f5",
+    "sanitized_sha256": "ff666060906572b341146f184e10af51c1995a4dfe064c9a9f3cd77e3f9233cc",
+    "kept_modules": [
+      {
+        "bundle": "CCBadgeClear.bundle",
+        "identifier": "netskao.ccbadgeclear"
+      },
+      {
+        "bundle": "CCCellularRateModule.bundle",
+        "identifier": "netskao.cccellularratemodule"
+      },
+      {
+        "bundle": "CCSIM.bundle",
+        "identifier": "netskao.ccsim"
+      },
+      {
+        "bundle": "CCSwitchDataModule.bundle",
+        "identifier": "netskao.ccswitchdatamodule"
+      },
+      {
+        "bundle": "CCVPN.bundle",
+        "identifier": "com.skypain.ccvpn"
+      },
+      {
+        "bundle": "UptimeModule.bundle",
+        "identifier": "com.mtac.uptimemodule"
+      },
+      {
+        "bundle": "cpuMagicCCBundle.bundle",
+        "identifier": "com.sop.cpumagicrootless"
+      }
+    ],
+    "removed_modules": [
+      {
+        "bundle": "AlipayScan.bundle",
+        "identifier": "netskao.alipayscan"
+      },
+      {
+        "bundle": "CAPerfHUDModule.bundle",
+        "identifier": "com.kdt.caperfhudcc"
+      },
+      {
+        "bundle": "CCAutoBrightness.bundle",
+        "identifier": "com.skypain.ccautobrightness"
+      },
+      {
+        "bundle": "CCLiftToWake.bundle",
+        "identifier": "com.netskao.cclifttowake"
+      },
+      {
+        "bundle": "CCLocation.bundle",
+        "identifier": "com.skypain.cclocation"
+      },
+      {
+        "bundle": "CCLockScreen.bundle",
+        "identifier": "com.skypain.cclockscreen"
+      },
+      {
+        "bundle": "CCRespring.bundle",
+        "identifier": "com.skypain.ccrespring"
+      },
+      {
+        "bundle": "CCScreenShot.bundle",
+        "identifier": "com.skypain.ccscreenshot"
+      },
+      {
+        "bundle": "CCSettrings.bundle",
+        "identifier": "com.skypain.ccsettrings"
+      },
+      {
+        "bundle": "CCVibration.bundle",
+        "identifier": "com.KingPuffaddi.control-center.CCVibration"
+      },
+      {
+        "bundle": "FilzaModule.bundle",
+        "identifier": "com.jailbreak365.control-center.FilzaModule"
+      },
+      {
+        "bundle": "MuteModule.bundle",
+        "identifier": "com.jailbreak365.control-center.MuteModuleCC"
+      },
+      {
+        "bundle": "QuantumultXLauncher.bundle",
+        "identifier": "netskao.quantumultxlauncher"
+      },
+      {
+        "bundle": "SafariModule.bundle",
+        "identifier": "com.jailbreak365.control-center.SafariModule"
+      },
+      {
+        "bundle": "SileoModule.bundle",
+        "identifier": "com.jailbreak365.control-center.SileoModule"
+      },
+      {
+        "bundle": "TelegramModule.bundle",
+        "identifier": "com.jailbreak365.control-center.TelegramModule"
+      },
+      {
+        "bundle": "TinyDisplayModule.bundle",
+        "identifier": "netskao.tinydisplaymodule"
+      },
+      {
+        "bundle": "TinyMediaAudioModule.bundle",
+        "identifier": "netskao.tinymediaaudiomodule"
+      },
+      {
+        "bundle": "TwitterModule.bundle",
+        "identifier": "com.jailbreak365.control-center.TwitterModule"
+      },
+      {
+        "bundle": "WeChatScan.bundle",
+        "identifier": "netskao.wechatscan"
+      },
+      {
+        "bundle": "YouTubeModule.bundle",
+        "identifier": "com.jailbreak365.control-center.YouTubeModule"
+      },
+      {
+        "bundle": "qswx.bundle",
+        "identifier": "com.zqbb.qswx"
+      },
+      {
+        "bundle": "qszfb.bundle",
+        "identifier": "com.zqbb.qszfb"
+      }
+    ],
+    "removed_paths": [
+      "Library/ControlCenter/Bundles/AlipayScan.bundle",
+      "Library/ControlCenter/Bundles/AlipayScan.bundle/AlipayScan",
+      "Library/ControlCenter/Bundles/AlipayScan.bundle/AlipayScan.roothidepatch",
+      "Library/ControlCenter/Bundles/AlipayScan.bundle/Icon@2x.png",
+      "Library/ControlCenter/Bundles/AlipayScan.bundle/Info.plist",
+      "Library/ControlCenter/Bundles/AlipayScan.bundle/SettingsIcon@2x.png",
+      "Library/ControlCenter/Bundles/CAPerfHUDModule.bundle",
+      "Library/ControlCenter/Bundles/CAPerfHUDModule.bundle/AppIcon@1x.png",
+      "Library/ControlCenter/Bundles/CAPerfHUDModule.bundle/AppIcon@2x.png",
+      "Library/ControlCenter/Bundles/CAPerfHUDModule.bundle/AppIcon@3x.png",
+      "Library/ControlCenter/Bundles/CAPerfHUDModule.bundle/CAPerfHUDModule",
+      "Library/ControlCenter/Bundles/CAPerfHUDModule.bundle/CAPerfHUDModule.roothidepatch",
+      "Library/ControlCenter/Bundles/CAPerfHUDModule.bundle/Info.plist",
+      "Library/ControlCenter/Bundles/CAPerfHUDModule.bundle/SettingsIcon.png",
+      "Library/ControlCenter/Bundles/CCAutoBrightness.bundle",
+      "Library/ControlCenter/Bundles/CCAutoBrightness.bundle/CCAutoBrightness",
+      "Library/ControlCenter/Bundles/CCAutoBrightness.bundle/CCAutoBrightness.roothidepatch",
+      "Library/ControlCenter/Bundles/CCAutoBrightness.bundle/Info.plist",
+      "Library/ControlCenter/Bundles/CCAutoBrightness.bundle/SettingsIcon@2x.png",
+      "Library/ControlCenter/Bundles/CCAutoBrightness.bundle/icon@3x.png",
+      "Library/ControlCenter/Bundles/CCLiftToWake.bundle",
+      "Library/ControlCenter/Bundles/CCLiftToWake.bundle/CCLiftToWake",
+      "Library/ControlCenter/Bundles/CCLiftToWake.bundle/CCLiftToWake.roothidepatch",
+      "Library/ControlCenter/Bundles/CCLiftToWake.bundle/Info.plist",
+      "Library/ControlCenter/Bundles/CCLiftToWake.bundle/SettingsIcon@3x.png",
+      "Library/ControlCenter/Bundles/CCLocation.bundle",
+      "Library/ControlCenter/Bundles/CCLocation.bundle/CCLocation",
+      "Library/ControlCenter/Bundles/CCLocation.bundle/CCLocation.roothidepatch",
+      "Library/ControlCenter/Bundles/CCLocation.bundle/Info.plist",
+      "Library/ControlCenter/Bundles/CCLocation.bundle/SettingsIcon@2x.png",
+      "Library/ControlCenter/Bundles/CCLocation.bundle/icon@3x.png",
+      "Library/ControlCenter/Bundles/CCLockScreen.bundle",
+      "Library/ControlCenter/Bundles/CCLockScreen.bundle/CCLockScreen",
+      "Library/ControlCenter/Bundles/CCLockScreen.bundle/CCLockScreen.roothidepatch",
+      "Library/ControlCenter/Bundles/CCLockScreen.bundle/Info.plist",
+      "Library/ControlCenter/Bundles/CCLockScreen.bundle/SettingsIcon@2x.png",
+      "Library/ControlCenter/Bundles/CCLockScreen.bundle/icon@3x.png",
+      "Library/ControlCenter/Bundles/CCRespring.bundle",
+      "Library/ControlCenter/Bundles/CCRespring.bundle/CCRespring",
+      "Library/ControlCenter/Bundles/CCRespring.bundle/CCRespring.roothidepatch",
+      "Library/ControlCenter/Bundles/CCRespring.bundle/Info.plist",
+      "Library/ControlCenter/Bundles/CCRespring.bundle/SettingsIcon@2x.png",
+      "Library/ControlCenter/Bundles/CCRespring.bundle/en.lproj",
+      "Library/ControlCenter/Bundles/CCRespring.bundle/en.lproj/Localizable.strings",
+      "Library/ControlCenter/Bundles/CCRespring.bundle/icon@3x.png",
+      "Library/ControlCenter/Bundles/CCRespring.bundle/zh_CN.lproj",
+      "Library/ControlCenter/Bundles/CCRespring.bundle/zh_CN.lproj/Localizable.strings",
+      "Library/ControlCenter/Bundles/CCScreenShot.bundle",
+      "Library/ControlCenter/Bundles/CCScreenShot.bundle/CCScreenShot",
+      "Library/ControlCenter/Bundles/CCScreenShot.bundle/CCScreenShot.roothidepatch",
+      "Library/ControlCenter/Bundles/CCScreenShot.bundle/Info.plist",
+      "Library/ControlCenter/Bundles/CCScreenShot.bundle/SettingsIcon@2x.png",
+      "Library/ControlCenter/Bundles/CCScreenShot.bundle/icon@3x.png",
+      "Library/ControlCenter/Bundles/CCSettrings.bundle",
+      "Library/ControlCenter/Bundles/CCSettrings.bundle/CCSettrings",
+      "Library/ControlCenter/Bundles/CCSettrings.bundle/CCSettrings.roothidepatch",
+      "Library/ControlCenter/Bundles/CCSettrings.bundle/Info.plist",
+      "Library/ControlCenter/Bundles/CCSettrings.bundle/SettingsIcon@2x.png",
+      "Library/ControlCenter/Bundles/CCSettrings.bundle/icon@3x.png",
+      "Library/ControlCenter/Bundles/CCVibration.bundle",
+      "Library/ControlCenter/Bundles/CCVibration.bundle/CCVibration",
+      "Library/ControlCenter/Bundles/CCVibration.bundle/CCVibration.roothidepatch",
+      "Library/ControlCenter/Bundles/CCVibration.bundle/Icon@2x.png",
+      "Library/ControlCenter/Bundles/CCVibration.bundle/Icon@3x.png",
+      "Library/ControlCenter/Bundles/CCVibration.bundle/Info.plist",
+      "Library/ControlCenter/Bundles/CCVibration.bundle/SettingsIcon@2x.png",
+      "Library/ControlCenter/Bundles/CCVibration.bundle/SettingsIcon@3x.png",
+      "Library/ControlCenter/Bundles/FilzaModule.bundle",
+      "Library/ControlCenter/Bundles/FilzaModule.bundle/Assets.car",
+      "Library/ControlCenter/Bundles/FilzaModule.bundle/Info.plist",
+      "Library/ControlCenter/Bundles/MuteModule.bundle",
+      "Library/ControlCenter/Bundles/MuteModule.bundle/Assets.car",
+      "Library/ControlCenter/Bundles/MuteModule.bundle/Info.plist",
+      "Library/ControlCenter/Bundles/MuteModule.bundle/MuteModule",
+      "Library/ControlCenter/Bundles/MuteModule.bundle/MuteModule.roothidepatch",
+      "Library/ControlCenter/Bundles/QuantumultXLauncher.bundle",
+      "Library/ControlCenter/Bundles/QuantumultXLauncher.bundle/Icon@3x.png",
+      "Library/ControlCenter/Bundles/QuantumultXLauncher.bundle/Info.plist",
+      "Library/ControlCenter/Bundles/QuantumultXLauncher.bundle/QuantumultXLauncher",
+      "Library/ControlCenter/Bundles/QuantumultXLauncher.bundle/QuantumultXLauncher.roothidepatch",
+      "Library/ControlCenter/Bundles/QuantumultXLauncher.bundle/SettingsIcon@3x.png",
+      "Library/ControlCenter/Bundles/SafariModule.bundle",
+      "Library/ControlCenter/Bundles/SafariModule.bundle/Assets.car",
+      "Library/ControlCenter/Bundles/SafariModule.bundle/Info.plist",
+      "Library/ControlCenter/Bundles/SileoModule.bundle",
+      "Library/ControlCenter/Bundles/SileoModule.bundle/Assets.car",
+      "Library/ControlCenter/Bundles/SileoModule.bundle/Info.plist",
+      "Library/ControlCenter/Bundles/TelegramModule.bundle",
+      "Library/ControlCenter/Bundles/TelegramModule.bundle/Assets.car",
+      "Library/ControlCenter/Bundles/TelegramModule.bundle/Info.plist",
+      "Library/ControlCenter/Bundles/TinyDisplayModule.bundle",
+      "Library/ControlCenter/Bundles/TinyDisplayModule.bundle/Info.plist",
+      "Library/ControlCenter/Bundles/TinyDisplayModule.bundle/SettingsIcon@3x.png",
+      "Library/ControlCenter/Bundles/TinyDisplayModule.bundle/TinyDisplayModule",
+      "Library/ControlCenter/Bundles/TinyDisplayModule.bundle/TinyDisplayModule.roothidepatch",
+      "Library/ControlCenter/Bundles/TinyMediaAudioModule.bundle",
+      "Library/ControlCenter/Bundles/TinyMediaAudioModule.bundle/Info.plist",
+      "Library/ControlCenter/Bundles/TinyMediaAudioModule.bundle/SettingsIcon@3x.png",
+      "Library/ControlCenter/Bundles/TinyMediaAudioModule.bundle/TinyMediaAudioModule",
+      "Library/ControlCenter/Bundles/TinyMediaAudioModule.bundle/TinyMediaAudioModule.roothidepatch",
+      "Library/ControlCenter/Bundles/TwitterModule.bundle",
+      "Library/ControlCenter/Bundles/TwitterModule.bundle/Assets.car",
+      "Library/ControlCenter/Bundles/TwitterModule.bundle/Info.plist",
+      "Library/ControlCenter/Bundles/WeChatScan.bundle",
+      "Library/ControlCenter/Bundles/WeChatScan.bundle/Icon@2x.png",
+      "Library/ControlCenter/Bundles/WeChatScan.bundle/Info.plist",
+      "Library/ControlCenter/Bundles/WeChatScan.bundle/SettingsIcon@2x.png",
+      "Library/ControlCenter/Bundles/WeChatScan.bundle/WeChatScan",
+      "Library/ControlCenter/Bundles/WeChatScan.bundle/WeChatScan.roothidepatch",
+      "Library/ControlCenter/Bundles/YouTubeModule.bundle",
+      "Library/ControlCenter/Bundles/YouTubeModule.bundle/Assets.car",
+      "Library/ControlCenter/Bundles/YouTubeModule.bundle/Info.plist",
+      "Library/ControlCenter/Bundles/qswx.bundle",
+      "Library/ControlCenter/Bundles/qswx.bundle/Info.plist",
+      "Library/ControlCenter/Bundles/qswx.bundle/SettingsIcon@2x.png",
+      "Library/ControlCenter/Bundles/qswx.bundle/icon@2x.png",
+      "Library/ControlCenter/Bundles/qswx.bundle/qswx",
+      "Library/ControlCenter/Bundles/qswx.bundle/qswx.roothidepatch",
+      "Library/ControlCenter/Bundles/qszfb.bundle",
+      "Library/ControlCenter/Bundles/qszfb.bundle/Info.plist",
+      "Library/ControlCenter/Bundles/qszfb.bundle/SettingsIcon@2x.png",
+      "Library/ControlCenter/Bundles/qszfb.bundle/icon@2x.png",
+      "Library/ControlCenter/Bundles/qszfb.bundle/qszfb",
+      "Library/ControlCenter/Bundles/qszfb.bundle/qszfb.roothidepatch",
+      "Library/MobileSubstrate/DynamicLibraries/C18ConnectivityFive.dylib",
+      "Library/MobileSubstrate/DynamicLibraries/C18PowerMenu.dylib",
+      "Library/MobileSubstrate/DynamicLibraries/C18PowerMenu.dylib.roothidepatch",
+      "Library/MobileSubstrate/DynamicLibraries/C18PowerMenu.plist",
+      "usr/bin/CADebugHelper"
+    ],
+    "removed_file_sha256": {
+      "Library/ControlCenter/Bundles/MuteModule.bundle/Info.plist": "c8d8491fd2728a058a12267450f2b49ce569cdc447310d94d94fb6465cfe6131",
+      "Library/ControlCenter/Bundles/AlipayScan.bundle/Icon@2x.png": "b90c42832f28f3159a16d82e5914ca744dca26b01871f75ae65dcfc3b976c76e",
+      "usr/bin/CADebugHelper": "7eb308489e4519ebd88f9da33b2f6ae5bf02823bcf569df23db83228d8dbe36f",
+      "Library/ControlCenter/Bundles/CCLockScreen.bundle/Info.plist": "ff9919780a35fc37debd86a6e55db4b30605d9c404c66f8330a57d8cb451c496",
+      "Library/ControlCenter/Bundles/qswx.bundle/SettingsIcon@2x.png": "5054544d4ed32f8974dff68f1099daf31cc66c111afd404d45fb652eabd4b9d4",
+      "Library/ControlCenter/Bundles/qszfb.bundle/icon@2x.png": "689a9e827d3d24077f7becba3bd74fc93c05761510ffe926eb28ac40014b6b82",
+      "Library/ControlCenter/Bundles/CAPerfHUDModule.bundle/Info.plist": "6aec166fb7e2fc881a91c6d9736786c68d499ffa9bd22b030b756519d6d091fb",
+      "Library/ControlCenter/Bundles/CCLiftToWake.bundle/SettingsIcon@3x.png": "78ca90dce30d7b24d302d4d1c79f45fcaf3370f8ffe27c02a74606b4442a254c",
+      "Library/ControlCenter/Bundles/CCVibration.bundle/SettingsIcon@3x.png": "48ad181209521f4a097a3fa0ec6e2025b7d59b444d1cc264ef3971657c2efb7f",
+      "Library/ControlCenter/Bundles/qszfb.bundle/SettingsIcon@2x.png": "2badfad6ef78f41e4a3fd04026dc016e73e3e5db85f6e1348335239cd5afe8a2",
+      "Library/ControlCenter/Bundles/TelegramModule.bundle/Assets.car": "e8db7ef6e7f0e02327ed800304ce134ba73d0b39905b079da425e632b70979ed",
+      "Library/ControlCenter/Bundles/SafariModule.bundle/Assets.car": "a3d367b0cc95aef812e7946719bcd35a3d6b1fb5fab599f9d1d574bfd1c22005",
+      "Library/ControlCenter/Bundles/CCVibration.bundle/Icon@2x.png": "afe9ca855e1a9310b3f60ebb224914909a2dba6fd506ed8f1cdb9cad3e5434a0",
+      "Library/ControlCenter/Bundles/TinyDisplayModule.bundle/Info.plist": "416322db66753f5f536bfc474e6fc864d5c3239e13c0c942b9bb312eee058fc0",
+      "Library/ControlCenter/Bundles/CCLocation.bundle/Info.plist": "ef1c0e1be9f8581de1581e1e601148e61a67e013b051a178ec915f59a4436365",
+      "Library/ControlCenter/Bundles/MuteModule.bundle/MuteModule": "fcba734dcd7e4213efeb80a01294d214a2019f74a8a9c8343bb700f553aebd9a",
+      "Library/ControlCenter/Bundles/CAPerfHUDModule.bundle/AppIcon@3x.png": "577d1183952a6f72ec1f5e1248dd2ba5443bf02419d1851327c95873b18c41f4",
+      "Library/ControlCenter/Bundles/YouTubeModule.bundle/Info.plist": "8a65f96e2966159837ad270cf07e52a98fe5d6a57a51be47931b085cbc135d8b",
+      "Library/ControlCenter/Bundles/CCRespring.bundle/zh_CN.lproj/Localizable.strings": "11fa73bc130029c81be121f76684ce77f10852149abd1e4c5473d9358fba7cfc",
+      "Library/ControlCenter/Bundles/CCLockScreen.bundle/icon@3x.png": "88f5c8e042fa1f4bf6d6ff019f4fb9b624df25e7b9dffbd8c638973b7d62c1b4",
+      "Library/ControlCenter/Bundles/qswx.bundle/Info.plist": "47a2de1a22aa27e2226f587e34c39df48cd0c9017f254f3608ef3e52be43aab1",
+      "Library/ControlCenter/Bundles/CCAutoBrightness.bundle/SettingsIcon@2x.png": "2f20c9bb0254c7212306ad48005427c14893f93abc0d713051b6003f24d95d02",
+      "Library/ControlCenter/Bundles/QuantumultXLauncher.bundle/SettingsIcon@3x.png": "a0c1dc8526fb71fc11f9fd3814eee2176bf942e625cbe23d75aa9368fadcec65",
+      "Library/ControlCenter/Bundles/CCVibration.bundle/SettingsIcon@2x.png": "cdb2f9c4d072b5f16d6043f6d291ae0219b30b5934bbf3120aaaf091668ff271",
+      "Library/ControlCenter/Bundles/SileoModule.bundle/Info.plist": "107d5f46fbf4dc69be5a0dcf18377593ef736419166d5a6ebae3cdba0a667c7d",
+      "Library/MobileSubstrate/DynamicLibraries/C18PowerMenu.plist": "29bbe36650150dbedd2f466bb84abefadfb54eb0a5bddd1e6814d40c607618f8",
+      "Library/ControlCenter/Bundles/CCLiftToWake.bundle/CCLiftToWake": "bc23884d21832ed9350266bd171fb985a86bc081ab631778955ae2506c4bc084",
+      "Library/ControlCenter/Bundles/MuteModule.bundle/Assets.car": "338dfb5bf08b1ee8ebdaaeec764e6220ffd150aef367323e22c2a7d7e29c16b6",
+      "Library/ControlCenter/Bundles/QuantumultXLauncher.bundle/Icon@3x.png": "f0131cd0f660a16e0b6ca7fb6cb3ba18fafc24f46fd152f1189b90e5e3b653d4",
+      "Library/ControlCenter/Bundles/CCRespring.bundle/Info.plist": "ac52e6933cbe578fda1c492e9aaac9c5da542af7f823976e6f5dab4b6688232a",
+      "Library/ControlCenter/Bundles/TinyDisplayModule.bundle/TinyDisplayModule": "8e05da77fb3ccb28073ccae015236d7d0457461adac7bfacdcd01e2ac350aa4a",
+      "Library/ControlCenter/Bundles/TinyDisplayModule.bundle/SettingsIcon@3x.png": "7d21028ebc74992e4bccd55b517922bcf2aa6d3b910476b990ff056b55c56cea",
+      "Library/ControlCenter/Bundles/qswx.bundle/icon@2x.png": "12298c034afb95455d39cb3b768c33fa2a77203303b2f195f5290bdfb4233cb1",
+      "Library/ControlCenter/Bundles/TelegramModule.bundle/Info.plist": "b929d85705488ba70e5dca1122f970815059b034d23e545789ca8c610ba81ac9",
+      "Library/ControlCenter/Bundles/FilzaModule.bundle/Assets.car": "f90a712e55f7c544deedcd78786fb411b4025af54fadc5cd9896a401f9c090e7",
+      "Library/ControlCenter/Bundles/CAPerfHUDModule.bundle/AppIcon@2x.png": "67d1ef026457bcee7989a01cd615d804d0b16dab2e937d9813c4b87574f25fd1",
+      "Library/ControlCenter/Bundles/CCSettrings.bundle/icon@3x.png": "8aba5ec2c1e690e559e823b6345571ce0c21c089b2cef1f3316092485b2c6371",
+      "Library/ControlCenter/Bundles/WeChatScan.bundle/Info.plist": "8d3a844d705cfa378aa6a73613ece47659125703a73dc44551b7267e565c524d",
+      "Library/ControlCenter/Bundles/CCRespring.bundle/en.lproj/Localizable.strings": "77ab9d63152c8a76ab3f3790a09a0034185e3d7b622e87f23aeb98eb15ffb06d",
+      "Library/ControlCenter/Bundles/AlipayScan.bundle/AlipayScan": "47943dea53735d73e0b0e1fa40af226c2248cbac7a067b912ea4795a9e351722",
+      "Library/ControlCenter/Bundles/qszfb.bundle/Info.plist": "6901738921a694f4ec9931315510f1a5eced445f078b562ffc5f932638350402",
+      "Library/ControlCenter/Bundles/CCSettrings.bundle/Info.plist": "2e39623149883052e32ae488574870800b0110d071a4aff35983ede70af0c6d4",
+      "Library/ControlCenter/Bundles/CCLockScreen.bundle/SettingsIcon@2x.png": "450466d883bb8365e3cdd01e6ef7ecb1ba4441a619461a14604b8a36458d8288",
+      "Library/ControlCenter/Bundles/AlipayScan.bundle/SettingsIcon@2x.png": "b6bd5056ee9b27e26b57823e539f7621847a188afecd7a537d1b1377256872e3",
+      "Library/ControlCenter/Bundles/CCVibration.bundle/Icon@3x.png": "423e34692996d311d2183d350ac1e18b16d2d66511857651e034cd96e92c1478",
+      "Library/ControlCenter/Bundles/TinyMediaAudioModule.bundle/TinyMediaAudioModule": "8031e59edb46f292a82e3b28823028949f77e43efc9c652b88c263396ea67fb9",
+      "Library/ControlCenter/Bundles/CCAutoBrightness.bundle/CCAutoBrightness": "97ba3e0a5ee1aa1107a5bf8da6d91d185bf94ba5697ed116bd9ee5199da25c6b",
+      "Library/ControlCenter/Bundles/CCRespring.bundle/SettingsIcon@2x.png": "7aacbde123386a57bea682c637efdfb0bc767a6bd576aeb9e1eb22354326c322",
+      "Library/ControlCenter/Bundles/CCSettrings.bundle/CCSettrings": "cd54cde5bb9475919eabf33d95c96d39284093061cece08b6dbbc379fd20aece",
+      "Library/ControlCenter/Bundles/CCScreenShot.bundle/icon@3x.png": "c8c7d6e56a45242dd5f4f102c80dadcd10c17a47200c1bcf827ab7c11a272ef9",
+      "Library/ControlCenter/Bundles/WeChatScan.bundle/SettingsIcon@2x.png": "0f9cd8287c2f17d92125a6aa3340474cae3d85acd946a6ca04ca2eb078610b4b",
+      "Library/ControlCenter/Bundles/CCLiftToWake.bundle/Info.plist": "54a6f7e0249bfd594d9c2a594aee7aec4924d665fea1c3d941459850d8e45c87",
+      "Library/ControlCenter/Bundles/CCScreenShot.bundle/SettingsIcon@2x.png": "b3626d48698b457693ebeaec46ed43ad6c7679882a6905e808bddb793fd9d330",
+      "Library/ControlCenter/Bundles/CCSettrings.bundle/SettingsIcon@2x.png": "4b81fab31bc893ddc6fb8f88c53afdb5d8a309f03783c18c8e4d5992a1faf890",
+      "Library/ControlCenter/Bundles/TinyMediaAudioModule.bundle/SettingsIcon@3x.png": "0df7d6aa2ef50da7a7d19d9e0bfa5ef9c1ed4f0b3650ed6c6289e5093ea51b44",
+      "Library/ControlCenter/Bundles/YouTubeModule.bundle/Assets.car": "19a1f9a755569e86456f3607f07d633fec36e5da19b244689986896a6ea05334",
+      "Library/ControlCenter/Bundles/WeChatScan.bundle/Icon@2x.png": "1c79c5de9801b60a6fd1522ad339cec003f94544694c344721f23ca7a8e0b6c2",
+      "Library/ControlCenter/Bundles/TwitterModule.bundle/Assets.car": "245e6c28b5d2aebf9c36fc8900d372999f4ada25180a6bc11bc0b22d43bfea5a",
+      "Library/ControlCenter/Bundles/AlipayScan.bundle/Info.plist": "f5f8dc97117b84793064c27e8f29b3397cf14a1dfe087becd43f9d1321c91078",
+      "Library/ControlCenter/Bundles/TinyMediaAudioModule.bundle/Info.plist": "819e4504c3462eb54cfae4df7a49db8676f6ae51efbabba3b1822867561fd63e",
+      "Library/MobileSubstrate/DynamicLibraries/C18PowerMenu.dylib": "5490c2a7ea6ebe4e4d0c2f568dccae4a609f69d9a9f0d9805e70c2749be6699b",
+      "Library/ControlCenter/Bundles/CCScreenShot.bundle/CCScreenShot": "42548754ab33b46353e2cb8d6a9b753638e94fae82611dda01066891dffdbfc3",
+      "Library/ControlCenter/Bundles/QuantumultXLauncher.bundle/QuantumultXLauncher": "73ae59c45eda65e410cd7625da2c82168a1db0f4b2f191176be429064dde5829",
+      "Library/ControlCenter/Bundles/CAPerfHUDModule.bundle/SettingsIcon.png": "5f5e23bd20e5f25a5c763599e8b858faf25cc03f1dbaf902e11bae1432ad2c7d",
+      "Library/ControlCenter/Bundles/CCRespring.bundle/CCRespring": "e5f6a5724bdd513d699042df3f77381e1690829775522e1c6456c411b78a17e9",
+      "Library/ControlCenter/Bundles/CCAutoBrightness.bundle/Info.plist": "d982e119fe610dd69a29eb3af995dd6fb02f43ffa3e405cf94bd9c60ed6145db",
+      "Library/ControlCenter/Bundles/CCScreenShot.bundle/Info.plist": "63cc65c79a15ffbf052f78c566bb195ec5b224c9902e493b6bb190a4d9ee52f6",
+      "Library/MobileSubstrate/DynamicLibraries/C18ConnectivityFive.dylib": "301552c827465be210a371e0cd38844e6d52f54b41f3cae34bd0f6124fc66df2",
+      "Library/ControlCenter/Bundles/CCAutoBrightness.bundle/icon@3x.png": "6a923a50f584a02300dd750aacf47dfae231f5a5f6809a09284b9f7c4e4351d0",
+      "Library/ControlCenter/Bundles/qswx.bundle/qswx": "1f0a8c37b67b9d531e0f7d574178835e49455ffe0debc95812276397520590f5",
+      "Library/ControlCenter/Bundles/CAPerfHUDModule.bundle/CAPerfHUDModule": "0502fe3ea259fd43eeadeb5ccea7adc98d9516e9a6d83165380f5f292236bed5",
+      "Library/ControlCenter/Bundles/QuantumultXLauncher.bundle/Info.plist": "3720a0aa3b5e0fc378cafd0755eaef626ad4798f8ce66eaddec9161b536d1ab9",
+      "Library/ControlCenter/Bundles/SafariModule.bundle/Info.plist": "f43b957f1ea07d9ae7a26c4ff7a5531354170fe43c03ae6eec1178697a92a881",
+      "Library/ControlCenter/Bundles/CCLocation.bundle/icon@3x.png": "b0d5cf3d8612675f26aee6ff83ce430667c34f2c2320e39f96243e037628afec",
+      "Library/ControlCenter/Bundles/FilzaModule.bundle/Info.plist": "765acb7fc3f96a03bad4a537c290e93bc293231ded10f5db235ade7a78307280",
+      "Library/ControlCenter/Bundles/CCVibration.bundle/Info.plist": "0db151a2c590e6500d6cc198884b24a6b0694bb6d997d748e3da3e0122dfd96f",
+      "Library/ControlCenter/Bundles/WeChatScan.bundle/WeChatScan": "5c62857bbff959bd7405873f79ff961a181f135f61402728cf1fef323730910b",
+      "Library/ControlCenter/Bundles/CAPerfHUDModule.bundle/AppIcon@1x.png": "5b27fdf5cb71741b8b18a9ccbfae37254560ed49b47cbace81d19f05adcb6c6e",
+      "Library/ControlCenter/Bundles/SileoModule.bundle/Assets.car": "888b8d3db4c31837b871133f6e56939c905e8c9c10e1f57757f138421b30fe59",
+      "Library/ControlCenter/Bundles/CCRespring.bundle/icon@3x.png": "61301b32fc4a547d5c712d0d46b51ab7595a4ecb21558e88e3ebda83dbbf827b",
+      "Library/ControlCenter/Bundles/TwitterModule.bundle/Info.plist": "0f774bd37beecb0877c3327c6f03206ca73457573423144a298195504b453691",
+      "Library/ControlCenter/Bundles/CCVibration.bundle/CCVibration": "460b22fc7f4410e24358824b57cfba892f91611c75bc41b871f6dab3b58e8e97",
+      "Library/ControlCenter/Bundles/CCLockScreen.bundle/CCLockScreen": "b5444d22a7fefd3baa357241c443e026e5a3352f045ebc88b9d5cc816974edc6",
+      "Library/ControlCenter/Bundles/CCLocation.bundle/CCLocation": "478eb01088483ec7c38f4b82cc34ca03ad8048681a814e7a9f271c935a5a23f7",
+      "Library/ControlCenter/Bundles/CCLocation.bundle/SettingsIcon@2x.png": "ba3f9d35299073d88fe7e92f4ed251abb8e5cfe3bda912869b73dba0a101b2ea",
+      "Library/ControlCenter/Bundles/qszfb.bundle/qszfb": "c17c878ddf4a302965d35bd3218522cb09d92535a268ebc13eb86283fb747b66"
+    },
+    "changed_metadata": [
+      "Library/ControlCenter/Bundles/CCSIM.bundle/Info.plist",
+      "Library/PreferenceBundles/ControlCenter18Prefs.bundle/Info.plist"
+    ],
+    "unrelated_entries_unchanged": true,
+    "kept_payload_unchanged_except_product_versions": true
+  }
+]
