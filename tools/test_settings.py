@@ -21,6 +21,8 @@ def main():
  bridge=(ROOT/'Settings/C18SettingsBridge.m').read_text()
  control=(ROOT/'Settings/C18EnableControl.m').read_text()
  assert bridge.count('preferenceSpecifierNamed:@"启用插件"')==1
+ assert bridge.count('[state.group setProperty:@"打开插件并注销，即可看到新的iOS18控制中心。" forKey:@"footerText"];')==1
+ assert '打开插件并注销，即可看到新的控制中心。' not in bridge
  for token in ('tableFooterView','C18EnableFooter','UISwitch new','UITableView alloc','cornerRadius','addSubview:','dispatch_after','viewDidLayoutSubviews'):
   assert token not in bridge,token
  for token in ('objc_allocateClassPair','C18EnableNativeListController','object_setClass','C18NativeSpecifiers','C18NativeOwnedSection','class_getMethodImplementation(gPSListClass,cmd)','_identifierAtIndexPath:','_isModulesSectionAtIndexPath:','cell:6 edit:Nil'):

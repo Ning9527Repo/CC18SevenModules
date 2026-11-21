@@ -124,6 +124,7 @@ static id C18NativeSpecifiers(id host,SEL command) {
         if(![original isKindOfClass:NSArray.class])return original;
         if(!state.group){
             state.group=[gSpecifierClass groupSpecifierWithName:nil];
+            [state.group setProperty:@"打开插件并注销，即可看到新的iOS18控制中心。" forKey:@"footerText"];
             state.toggle=[gSpecifierClass preferenceSpecifierNamed:@"启用插件" target:state.control set:@selector(setEnabled:specifier:) get:@selector(readEnabled:) detail:Nil cell:6 edit:Nil];
             [state.toggle setProperty:@"Enabled" forKey:@"key"];
             [state.toggle setProperty:@"com.evgeniy558.controlcenter18" forKey:@"defaults"];
