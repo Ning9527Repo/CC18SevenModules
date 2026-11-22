@@ -7,6 +7,7 @@
 #import <stdatomic.h>
 #import "../C18HookRuntime.h"
 #import "C18EnableControl.h"
+#import "../C18RadiusPreferences.h"
 extern void MSHookMessageEx(Class,SEL,IMP,IMP *);
 @interface C18NativeSpecifier : NSObject
 + (id)groupSpecifierWithName:(NSString *)name;
@@ -20,6 +21,7 @@ extern void MSHookMessageEx(Class,SEL,IMP,IMP *);
 @property(nonatomic,strong) C18EnableControl *control;
 @property(nonatomic,strong) C18NativeSpecifier *group;
 @property(nonatomic,strong) C18NativeSpecifier *toggle;
+@property(nonatomic,strong) NSArray *sliders;
 @property(nonatomic,strong) NSArray *published;
 @property(nonatomic) BOOL reading;
 @end
@@ -52,13 +54,13 @@ static id C18NativeLiveSpecifier(id host,NSIndexPath *path) {
 static BOOL C18NativeOwnedSection(id host,NSIndexPath *path) {
     C18NativeListState *state=objc_getAssociatedObject(host,&kNativeState);
     id spec=C18NativeLiveSpecifier(host,path);
-    return state && spec && (spec==state.toggle || spec==state.group);
+    return state && spec && (spec==state.toggle || spec==state.group || (state.sliders && [state.sliders indexOfObjectIdenticalTo:spec]!=NSNotFound));
 }
 static BOOL C18NativeModuleRow(id host,NSIndexPath *path) {
     C18NativeSpecifier *spec=C18NativeLiveSpecifier(host,path);
     if(!spec)return NO;
     C18NativeListState *state=objc_getAssociatedObject(host,&kNativeState);
-    if(spec==state.toggle || spec==state.group)return NO;
+    if(spec==state.toggle || spec==state.group || (state.sliders && [state.sliders indexOfObjectIdenticalTo:spec]!=NSNotFound))return NO;
     // The device's _specifiersForIdentifiers: uses PSCellClassKey and the
     // CCUISettingsListCell class. Plain switches/buttons are not module rows,
     // even when stale _enabledSectionIndex claims their section is enabled.
@@ -131,6 +133,26 @@ static id C18NativeSpecifiers(id host,SEL command) {
             [state.toggle setProperty:@NO forKey:@"default"];
             [state.toggle setProperty:@"NingCC18Enable" forKey:@"id"];
         }
+        if(!state.sliders){
+            NSArray *titles=@[@"连接模块圆角",@"播放器圆角",@"音量与亮度圆角",@"其他模块圆角"];
+            NSMutableArray *sliders=[NSMutableArray array];
+            NSArray *keys=C18RadiusKeys();
+            for(NSUInteger i=0;i<keys.count;i++){
+                C18NativeSpecifier *slider=[gSpecifierClass preferenceSpecifierNamed:titles[i] target:state.control set:@selector(setRadius:specifier:) get:@selector(readRadius:) detail:Nil cell:5 edit:Nil];
+                if(!slider || C18NativeCellType(slider)!=5)return original;
+                [slider setProperty:keys[i] forKey:@"key"];
+                [slider setProperty:keys[i] forKey:@"id"];
+                [slider setProperty:@C18_RADIUS_DOMAIN forKey:@"defaults"];
+                [slider setProperty:@0 forKey:@"default"];
+                [slider setProperty:@0 forKey:@"min"];
+                [slider setProperty:@100 forKey:@"max"];
+                [slider setProperty:@YES forKey:@"showValue"];
+                [slider setProperty:@NO forKey:@"isSegmented"];
+                [slider setProperty:@YES forKey:@"continuous"];
+                [sliders addObject:slider];
+            }
+            state.sliders=[sliders copy];
+        }
         if(!state.group || !state.toggle)return original;
         if(C18NativeCellType(state.group)!=0 || C18NativeCellType(state.toggle)!=6)return original;
         for(id existing in original)if(C18NativeCellType(existing)==NSNotFound)return original;
@@ -140,6 +162,19 @@ static id C18NativeSpecifiers(id host,SEL command) {
         BOOL hasToggle=[result indexOfObjectIdenticalTo:state.toggle]!=NSNotFound;
         if(hasGroup!=hasToggle){[result removeObjectIdenticalTo:state.group];[result removeObjectIdenticalTo:state.toggle];hasGroup=hasToggle=NO;}
         if(!hasGroup){[result addObject:state.group];[result addObject:state.toggle];}
+        // Keep exactly four native slider rows immediately after the switch,
+        // including hosts that reuse the original mutable specifier cache.
+        NSUInteger toggleIndex=[result indexOfObjectIdenticalTo:state.toggle];
+        BOOL ordered=toggleIndex!=NSNotFound && toggleIndex+state.sliders.count<result.count;
+        for(NSUInteger i=0;ordered && i<state.sliders.count;i++)
+            ordered=result[toggleIndex+1+i]==state.sliders[i];
+        if(!ordered){
+            for(id slider in state.sliders)[result removeObjectIdenticalTo:slider];
+            toggleIndex=[result indexOfObjectIdenticalTo:state.toggle];
+            if(toggleIndex==NSNotFound)return original;
+            NSIndexSet *indexes=[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(toggleIndex+1,state.sliders.count)];
+            [result insertObjects:state.sliders atIndexes:indexes];
+        }
         Ivar ivar=class_getInstanceVariable(gHostClass,"_specifiers");
         // Preserve the original mutable array and its native bridge cache marker.
         // Strong state ownership also covers hosts returning an immutable array.

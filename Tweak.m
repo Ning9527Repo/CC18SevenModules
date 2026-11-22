@@ -3,6 +3,7 @@
 #import "C18PressDriver.h"
 #import "C18Localization.h"
 #import "C18HookRuntime.h"
+#import "C18Radius.h"
 #import <QuartzCore/QuartzCore.h>
 #import <mach-o/dyld.h>
 #import <string.h>
@@ -442,6 +443,7 @@ static void C18ShellPresentHook(id self, SEL cmd) {
     NSUInteger generation=gC18PresentationGeneration;BOOL completed=NO;
     @try {
         C18InstallViewHooks();
+        C18RadiusReload();
         C18ReloadConfig();
         C18InstallButtonMirrors();
         C18FiveInstallModuleHooks();
@@ -473,6 +475,7 @@ static void C18ShellDismissHook(id self, SEL cmd) {
     if (oShellDismiss) oShellDismiss(self,cmd);
 }
 static void C18InstallViewHooks(void) {
+    C18RadiusInstall();
     C18NativeLayoutRestoreInstall();
     C18InstallButtonMirrors();
     C18PowerMenuInstall();

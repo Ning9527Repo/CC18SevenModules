@@ -54,6 +54,12 @@ def verify():
                     cpu,sub,offset,size,align=struct.unpack_from('>5I',content,8+i*20)
                     assert cpu==0x100000c and sub in (0,0x80000002) and offset+size<=len(content)
                     assert struct.unpack_from('<3I',content,offset)==(0xfeedfacf,cpu,sub)
+                    if name.endswith('C18FourSettings.dylib'):
+                        for token in (b'RadiusConnectivity',b'RadiusPlayer',b'RadiusSliders',b'RadiusOther',b'readRadius:',b'setRadius:specifier:'):
+                            assert token in content[offset:offset+size], ('missing slider',hex(sub),token)
+                    if name.endswith('C18ConnectivityFive.dylib'):
+                        for token in (b'C18RadiusLayerSnapshot',b'com.ning.controlcenter18.radius/changed',b'RadiusConnectivity',b'RadiusOther'):
+                            assert token in content[offset:offset+size], ('missing radius runtime',hex(sub),token)
                     subtypes.append(sub)
                 assert set(subtypes)=={0,0x80000002}, name
                 out=Path(temporary)/f'{arch}-{index}.dylib';out.write_bytes(content)

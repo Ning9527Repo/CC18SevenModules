@@ -21,6 +21,7 @@ jobs:
           python3 tools/test_native_install.py
           python3 tools/test_native_access.py
           python3 tools/test_sileo_icon.py
+          python3 tools/test_radius.py
       - name: Check four-action backend and obsolete UI deletion
         run: python3 tools/test_power_root.py
       - name: Compile and sign companion
@@ -29,7 +30,7 @@ jobs:
           set -euo pipefail
           SDK="$(xcrun --sdk iphoneos --show-sdk-path)"
           mkdir -p build dist
-          SRC=(Tweak.m C18FiveConfig.m C18FiveModules.m C18FiveEditor.m C18CarrierNames.m C18DataSwitch.m C18NativeLayoutRestore.m C18PowerMenu.m C18GlyphSources.m C18CellularRate.m C18PressDriver.m C18Localization.m C18UptimeFix.m)
+          SRC=(Tweak.m C18Radius.m C18FiveConfig.m C18FiveModules.m C18FiveEditor.m C18CarrierNames.m C18DataSwitch.m C18NativeLayoutRestore.m C18PowerMenu.m C18GlyphSources.m C18CellularRate.m C18PressDriver.m C18Localization.m C18UptimeFix.m)
           for ARCH in arm64 arm64e; do
             xcrun --sdk iphoneos clang -fobjc-arc -O2 \
               -Werror=implicit-function-declaration -Werror=objc-method-access \
